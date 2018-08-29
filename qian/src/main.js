@@ -9,8 +9,9 @@ import Vant from "vant"; //引入vant
 import "vant/lib/vant-css/index.css";
 import api from "./http/api/index"; //挂载封装好的api
 import VueAwesomeSwiper from "vue-awesome-swiper";
-// require styles
 import "swiper/dist/css/swiper.css";
+import "lib-flexible";
+
 Vue.use(VueAwesomeSwiper);
 Vue.use(Vant);
 

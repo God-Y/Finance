@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import startPage from "./views/start.vue";
+import StartPage from "./views/Start.vue"; //引导页
+import Login from "./views/Login.vue"; //登陆页
 
 Vue.use(Router);
 
@@ -17,10 +18,12 @@ export default new Router({
     {
       path: "/start",
       name: "start",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: startPage
+      component: StartPage
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login
     }
   ]
 });
