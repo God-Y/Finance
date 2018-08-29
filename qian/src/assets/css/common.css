@@ -1,0 +1,7 @@
+/* 全局的动画 */
+.fade-guide-leave-active {
+  transition: opacity 4s;
+}
+.fade-guide-leave-to {
+  opacity: 0;
+}
