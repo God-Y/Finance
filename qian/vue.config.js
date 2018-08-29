@@ -36,6 +36,13 @@ module.exports = {
   //   // 启用 CSS modules for all css / pre-processor files.
   //   modules: false
   // },
+  css: {
+    loaderOptions: {
+      sass :{
+        data: `@import "@/assets/scss/all.scss";`
+      }
+    }
+  },
   // use thread-loader for babel & TS in production build
   // enabled by default if the machine has more than 1 cores
   parallel: require('os').cpus().length > 1,

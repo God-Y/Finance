@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <transition>
+    <!-- <transition> -->
       <keep-alive>
         <router-view/>
       </keep-alive>
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -13,7 +13,6 @@
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 #nav {

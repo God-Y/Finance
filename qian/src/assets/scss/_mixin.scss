@@ -1,0 +1,19 @@
+//竖直居中
+%po-valign {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+//水平居中
+%po-align {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+//水平垂直居中
+%po-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}

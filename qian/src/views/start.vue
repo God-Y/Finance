@@ -54,6 +54,7 @@ export default {
       console.log(1);
     },
     go() {
+      this.$router.push("/login");
     }
   }
 };
