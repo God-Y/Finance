@@ -54,7 +54,6 @@ export default {
       console.log(1);
     },
     go() {
-      this.guideShow = false;
     }
   }
 };
@@ -62,7 +61,6 @@ export default {
 <style lang="scss" scoped>
 //启动页
 .guide-img {
-  // width: 100%;
   position: absolute;
   width: 100%;
   left: 0;
