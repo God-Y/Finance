@@ -17,3 +17,10 @@
   top: 50%;
   transform: translate(-50%,-50%);
 }
+
+//flex 水平垂直居中
+%flex--center-vartical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

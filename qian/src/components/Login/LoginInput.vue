@@ -87,18 +87,40 @@ export default {
       this[value] = true;
     },
     //手机输入框失去焦点
+<<<<<<< HEAD
     phoneBlur() {
       this.phoneShow = false;
     },
     //密码输入框失去焦点
     pwdBlur() {
       this.pwdShow = false;
+=======
+    phoneBlur(value) {
+      this.phoneShow = false;
+      console.log(value);
+    },
+    pwdFocus() {
+      this.pwdShow = true;
+      // console.log(111111111111111111111)
+    },
+    //密码输入框失去焦点
+    pwdBlur(value) {
+      console.log(value);
+      this.pwdShow = false;
+      this.pwdType = "password";
+      this.seePwdShow = true;
+      // console.log(5222222222222222)
+>>>>>>> bb16e0dda331691b9957522caec988e023bdfd14
     },
     //查看密码
     seePwd() {
       let pwd = this.$refs.password;
       pwd.focus(); //点击事件需要保留焦点
       this.seePwdShow = !this.seePwdShow; //查看密码图标
+<<<<<<< HEAD
+=======
+      // console.log(this.seePwdShow,3333333333333333333)
+>>>>>>> bb16e0dda331691b9957522caec988e023bdfd14
       this.pwdType = this.pwdType === "password" ? "text" : "password";
     },
     clearData(value) {
