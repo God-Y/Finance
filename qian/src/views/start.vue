@@ -22,6 +22,8 @@ export default {
   data() {
     return {
       swiperOption: {
+        observer: true,
+        observeParents: true,
         pagination: {
           el: ".swiper-pagination"
         },

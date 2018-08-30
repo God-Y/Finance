@@ -16,6 +16,7 @@ export default {
 .header-box {
   position: relative;
   text-align: center;
+  // font-size: 17px;
   font-size: 17px;
   background: #fff;
   color: $header-color;

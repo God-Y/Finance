@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <common-header title="登录"></common-header>
-    <login-input></login-input>
+    <login-input :login-msg="user"></login-input>
   </div>
 </template>
  
@@ -15,7 +15,12 @@ export default {
     LoginInput
   },
   data() {
-    return {};
+    return {
+      user: {
+        phone: "",
+        password: ""
+      }
+    };
   },
   computed: {},
   mounted() {},
