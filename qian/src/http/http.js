@@ -1,17 +1,17 @@
 //引入axios
 import axios from "axios";
 import router from "../router";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 
 //防止发送多次请求
 let CancelToken = axios.CancelToken; //取消请求
 let cancelFlag = true;
 //设置错误消息
-const tip = (msg) => {
+const tip = msg => {
   Toast({
     type: "fail",
-    message: msg, 
-    duration: 1500,    
+    message: msg,
+    duration: 1500,
     forbidClick: true //错误提示期间不允许点击背景
   });
 };
@@ -22,7 +22,7 @@ const toLogin = () => {
 };
 
 //请求失败后错误统一处理
-const errorHandle = (status, other) => {
+const errorHandle = status => {
   // 状态码判断
   switch (status) {
     case 400:

@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import StartPage from "./views/Start.vue"; //引导页
+import StartPage from "./views/start.vue"; //引导页
 import Login from "./views/Login.vue"; //登陆页
-
+import Commend from "./views/Commend/Commend.vue"; /* 推荐页 */
 Vue.use(Router);
 
 export default new Router({
@@ -24,6 +24,11 @@ export default new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/commend",
+      name: "commend",
+      component: Commend
     }
   ]
 });

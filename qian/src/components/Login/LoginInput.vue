@@ -62,7 +62,7 @@
 export default {
   name: "LoginInput",
   props: {
-    LoginMsg:Object //定义登录用的数据
+    LoginMsg: Object //定义登录用的数据
   },
   data() {
     return {
@@ -84,25 +84,27 @@ export default {
     },
     //手机输入框失去焦点
     phoneBlur(value) {
-      this.phoneShow= false;
+      this.phoneShow = false;
+      console.log(value);
     },
     pwdFocus() {
       this.pwdShow = true;
-      console.log(111111111111111111111)
+      // console.log(111111111111111111111)
     },
     //密码输入框失去焦点
     pwdBlur(value) {
+      console.log(value);
       this.pwdShow = false;
       this.pwdType = "password";
       this.seePwdShow = true;
-      console.log(5222222222222222)
+      // console.log(5222222222222222)
     },
     //查看密码
     seePwd() {
       let pwd = this.$refs.password;
       pwd.focus(); //点击事件需要保留焦点
       this.seePwdShow = !this.seePwdShow; //查看密码图标
-      console.log(this.seePwdShow,3333333333333333333)
+      // console.log(this.seePwdShow,3333333333333333333)
       this.pwdType = this.pwdType === "password" ? "text" : "password";
     },
     clearData(value) {
