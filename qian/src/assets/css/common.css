@@ -5,3 +5,16 @@
 .fade-guide-leave-to {
   opacity: 0;
 }
+
+/* 产品轮播覆盖 */
+.carousel-3d-slider{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: auto;
+}
+
+/* 产品列表下划线 */
+.van-tabs__line {
+  background: #e8c763 !important;
+}

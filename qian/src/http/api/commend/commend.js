@@ -8,5 +8,17 @@ export default {
   //获取产品推荐
   productCommend() {
     return axios.get(`/api/product/recommended`);
+  },
+
+  //获取banner详情
+  getBanner(id) {
+    return axios.get(`/api/banner/${id}`);
+  },
+
+  //获取产品列表
+  getProductList(data) {
+    return axios.get(`/api//app/list/products`, {
+      prams: data
+    });
   }
 };
