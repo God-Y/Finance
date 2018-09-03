@@ -1,7 +1,9 @@
 //引入axios
 import axios from "axios";
 import router from "../router";
+import store from "../store";
 import { Toast } from "vant";
+import * as Loading from "./globalLoading";
 
 //防止发送多次请求
 let CancelToken = axios.CancelToken; //取消请求
@@ -75,6 +77,7 @@ var instance = axios.create({ timeout: 1000 * 12 });
 
 instance.interceptors.request.use(
   config => {
+    let cancelToken = null;
     // 登录流程控制中，根据本地是否存在token判断用户的登录情况
     // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
     // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
@@ -88,12 +91,13 @@ instance.interceptors.request.use(
     } else {
       //重复发送请求,就会取消请求
       let cancel;
-      let cancelToken;
       cancelToken = new CancelToken(c => {
         cancel = c;
       });
       cancel(); //取消请求
+      cancelToken;
     }
+    Loading.showFullLoading(); //动画开始加载
     return config;
   },
   error => Promise.reject(error)
@@ -102,6 +106,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // 请求成功
   res => {
+    Loading.hideFullLoading(); //动画加载结束
+    if (!store.state.netWork) {
+      store.commit("changeNetwork", true);
+    }
     cancelFlag = true; //得到请求时，设置cancelFlag为true
     return res.status === 200 ? Promise.resolve(res) : Promise.reject(res);
   },
@@ -112,14 +120,13 @@ instance.interceptors.response.use(
       // 请求已发出，但是不在2xx的范围，调用错误处理函数
       errorHandle(response.status, response.data.message);
       return Promise.reject(response);
+    } else {
+      // 处理断网的情况,暂时不需要
+      // eg:请求超时或断网时，更新state的network状态
+      // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
+      // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
+      store.commit("changeNetwork", false);
     }
-    // else {
-    //     // 处理断网的情况,暂时不需要
-    //     // eg:请求超时或断网时，更新state的network状态
-    //     // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
-    //     // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
-    //     store.commit('changeNetwork', false);
-    // }
   }
 );
 export default instance;

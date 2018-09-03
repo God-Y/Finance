@@ -6,7 +6,7 @@
         :class="{'input-container-border':phoneShow}"
       >
         <label for="username" class="label-item">
-          <img src="@/assets/img/phone.png">
+          <img src="@/assets/img/user/phone.png">
         </label>
         <input 
           type="text" 
@@ -18,9 +18,10 @@
           ref="username"
           id="username" 
           class="input-item"
+          placeholder="请输入11位手机号"
         >
         <img 
-          src="@/assets/img/close.png" 
+          src="@/assets/img/user/close.png" 
           class="close-btn" 
           v-if="phoneShow"
           @click="clearData('phone')"
@@ -31,7 +32,7 @@
         :class="{'input-container-border':pwdShow}"
       >
         <label for="password" class="label-item">
-          <img src="@/assets/img/lock.png">
+          <img src="@/assets/img/user/lock.png">
         </label>
         <input 
           :type="pwdType" 
@@ -41,9 +42,10 @@
           @focus="focus('pwdShow')"
           @blur="pwdBlur"
           ref='password'
+          placeholder="请输入密码"
         >
         <img 
-          src="@/assets/img/close.png" 
+          src="@/assets/img/user/close.png" 
           class="close-btn" 
           v-if="pwdShow"
           @click.stop ="clearData('password')"

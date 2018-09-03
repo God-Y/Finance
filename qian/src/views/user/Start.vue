@@ -1,13 +1,13 @@
 <template>
   <div class="start-box">
   <transition name="fade-guide" v-if="guideShow">
-    <img src="../assets/img/guide.png" class="guide-img">
+    <img src="@/assets/img/guide.png" class="guide-img">
   </transition>
   <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
     <!-- slides -->
-    <swiper-slide><img src="../assets/img/start1.png" alt="" class="slide-img"></swiper-slide>
-    <swiper-slide><img src="../assets/img/start2.png" alt="" class="slide-img"></swiper-slide>
-    <swiper-slide><img src="../assets/img/start3.png" alt="" class="slide-img"></swiper-slide>
+    <swiper-slide><img src="@/assets/img/start1.png" alt="" class="slide-img"></swiper-slide>
+    <swiper-slide><img src="@/assets/img/start2.png" alt="" class="slide-img"></swiper-slide>
+    <swiper-slide><img src="@/assets/img/start3.png" alt="" class="slide-img"></swiper-slide>
     <!-- Optional controls -->
     <div class="swiper-pagination"  slot="pagination"></div>
     <div class="swiper-scrollbar"   slot="scrollbar"></div>

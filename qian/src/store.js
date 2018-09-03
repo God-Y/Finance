@@ -4,7 +4,13 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    netWork: true
+  },
+  mutations: {
+    changeNetwork(state, canUse) {
+      state.netWork = canUse;
+    }
+  },
   actions: {}
 });
