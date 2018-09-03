@@ -102,6 +102,7 @@ export default {
 <style lang="scss" scoped>
 .header-style {
   position: relative;
+  background: #fff;
   @extend %flex-center-vartical;
   line-height: 50px;
   & > span {
@@ -161,6 +162,9 @@ export default {
     background: url(../../assets/img/CommendImg/badgeTwo.png) no-repeat;
     @include badge-style();
   } /* 徽章 */
+}
+main {
+  background: #fff;
 }
 .product-box {
   height: 294px;
