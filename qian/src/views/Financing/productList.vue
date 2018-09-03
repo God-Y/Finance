@@ -4,11 +4,11 @@
     v-model="loading"
     :finished="finished"
     @load="onLoad"
-    :offset="0"
+    :offset="10"
     :immediate-check= false
     >
       <div>
-        <div class="product" v-for="temp of productList" :key="temp.index">
+        <div @click="jumpDetailed(temp.id)" class="product" v-for="temp of productList" :key="temp.index">
           <p class="product-title">{{temp.name}}</p>
           <div class="line-style">
             <div>
@@ -16,8 +16,10 @@
               <span>预期年化&#12288;(%)</span>
             </div>
             <div>
-              <span class="font-style">{{temp.deadline}}</span>
-              <span class="line-two">理财期限&#12288;(<span>月</span>)</span>
+              <span class="font-style">{{temp.deadline | monthChnage}}</span>
+              <span class="line-two">理财期限&#12288;(
+                <span v-if="temp.deadline!= 7">月</span>
+                <span v-if="temp.deadline == 7">日</span>)</span>
             </div>
             <div>
               <span class="font-style">{{temp.startingAmount | amount}}</span>
@@ -51,11 +53,13 @@ export default {
   mounted() {},
   methods: {
     onLoad() {
+      console.log("load");
       this.getPage.pageNum += 1;
       console.log(this.getPage.pageNum);
       setTimeout(() => {
-        this.getList(this.getPage);
         this.loading = false;
+        this.getList(this.getPage);
+        // this.finished = true;
       }, 500);
     },
     getList(data) {
@@ -65,7 +69,10 @@ export default {
         this.productList = this.productList.concat(list);
         console.log(this.productList);
       });
-    } /* 获取产品列表 */
+    } /* 获取产品列表 */,
+    jumpDetailed(id) {
+      console.log(id);
+    }
   }
 };
 </script>

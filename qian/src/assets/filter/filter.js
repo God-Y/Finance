@@ -13,7 +13,14 @@ let filtersObj = {
         .toFixed(2)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
-  } /* 债权列表出借金额 */
+  } /* 债权列表出借金额 */,
+  monthChnage: function(val) {
+    if (val !== 7) {
+      return val / 30;
+    } else {
+      return val;
+    }
+  }
 };
 
 export default filtersObj;
