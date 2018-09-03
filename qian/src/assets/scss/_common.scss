@@ -1,0 +1,59 @@
+/* 全局的表单设置 */
+//选中后会显现边框
+.input-container-border {
+  border: 1px solid $input-border-color !important;
+  border-radius: 5px;
+}
+//输入框和密码输入框
+.input-container,
+.pwd-container {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background: #fff;
+  .close-btn {
+    @extend %po-valign;
+    right: 10px;
+    padding: 10px 5px;
+    width: 16px;
+    z-index: 5;
+  }
+  .input-item {
+    width: 88%;
+    height: 60px;
+    padding-left: 60px;
+    border: none;
+    font-size: 16px;
+  }
+  .label-item {
+    @extend %po-valign;
+    padding: 8px 15px;
+    font-size: 0;
+    &::after {
+      content: "";
+      @extend %po-valign;
+      left: 44px;
+      width: 1px;
+      height: 20px;
+      background: #d8d8d8;
+    }
+    span {
+      font-size: 30px;
+    }
+    img {
+      width: 14px;
+    }
+  }
+}
+.pwd-container {
+  .see-pwd {
+    @extend %po-valign;
+    right: 35px;
+    font-size: 24px;
+    padding: 10px 5px;
+  }
+}
+[class*=van-hairline]::after {
+  border-color:#d8d8d8;
+}

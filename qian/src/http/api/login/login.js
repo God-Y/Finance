@@ -1,4 +1,4 @@
-import axios from "@/http/http"; //导入创建好的axios实例
+// import axios from "../../http"; //导入创建好的axios实例
 
 export default {
   //登陆

@@ -1,6 +1,6 @@
 /* 全局的动画 */
 .fade-guide-leave-active {
-  transition: opacity 4s;
+  transition: opacity 2s;
 }
 .fade-guide-leave-to {
   opacity: 0;
@@ -17,4 +17,8 @@
 /* 产品列表下划线 */
 .van-tabs__line {
   background: #e8c763 !important;
+
+/* 全局的背景色 */
+body {
+  background-color: #eee;
 }
