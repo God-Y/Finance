@@ -6,7 +6,14 @@ let filtersObj = {
     let month = value.getMonth() + 1; //getMonth是从0开始，所以加+
     let day = value.getDate();
     return year + "-" + month + "-" + day;
-  }
+  },
+  amount: function(val) {
+    if (val !== undefined) {
+      return Number(val)
+        .toFixed(2)
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
+  } /* 债权列表出借金额 */
 };
 
 export default filtersObj;

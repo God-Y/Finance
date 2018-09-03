@@ -9,6 +9,10 @@ import UserProtocol from "./views/user/UserProtocol.vue"; /* 用户协议 */
 import PrivasyClause from "./views/user/PrivacyClause.vue"; /* 隐私条款 */
 import Commend from "./views/Commend/Commend.vue"; /* 推荐页 */
 import MePage from "./views/Me/Me.vue"; /* 推荐页 */
+import bannerDetailed from "./views/Commend/BannerDetailed.vue"; /* banner详情页 */
+import financingList from "./views/Financing/FinancingList.vue"; /* 理财列表 */
+import productList from "./views/Financing/productList.vue"; /* 理财列表 */
+import addList from "./views/Financing/AddList.vue"; /* 理财列表 */
 Vue.use(Router);
 
 export default new Router({
@@ -59,6 +63,26 @@ export default new Router({
       path: "/me", //我的页面
       name: "me",
       component: MePage
+    } /* 推荐 */,
+    {
+      path: "/bannerDetailed",
+      name: "bannerDetailed",
+      component: bannerDetailed
+    } /* 推荐banner图详情 */,
+    {
+      path: "/financingList",
+      name: "financingList",
+      component: financingList,
+      children: [
+        {
+          path: "productList",
+          component: productList
+        } /* 产品列表 */,
+        {
+          path: "addList",
+          component: addList
+        }
+      ]
     }
   ]
 });

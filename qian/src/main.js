@@ -11,6 +11,8 @@ import api from "./http/api/index"; //挂载封装好的api
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 import "lib-flexible";
+import Carousel3d from "vue-carousel-3d";
+Vue.use(Carousel3d); /* 3d轮播 */
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(Vant);
