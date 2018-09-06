@@ -20,12 +20,12 @@ Vue.use(Vant);
 Vue.config.productionTip = false;
 Vue.prototype.$api = api; //挂载封装好的api
 
+for (let key in vfilters) {
+  Vue.filter(key, vfilters[key]);
+}
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
-
-for (let key in vfilters) {
-  Vue.filter(key, vfilters[key]);
-}

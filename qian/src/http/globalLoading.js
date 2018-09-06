@@ -6,6 +6,7 @@ const startLoading = function() {
     duration: 0, // 持续展示 toast
     forbidClick: true, // 禁用背景点击
     loadingType: "spinner",
+    mask: true,
     message: "加载中"
   });
 };

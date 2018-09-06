@@ -1,21 +1,26 @@
 <template>
   <div class="me">
-    <me-header :user-list="userMsg"></me-header>
+    <me-header :user="userMsg" :profit ="profit"></me-header>
+    <me-list></me-list>
+    <common-footer></common-footer>
   </div>
 </template>
  
 <script>
-// import MeHeader from "@/components/Me/MeHeader.vue";
 import MeHeader from "@/components/Me/MeHeader";
+import MeList from "@/components/Me/MeList";
+import CommonFooter from "common/CommonFooter";
 export default {
   name: "Me",
   components: {
-    MeHeader
-    // MainContent
+    MeHeader,
+    MeList,
+    CommonFooter
   },
   data() {
     return {
-      userMsg: null
+      userMsg: null,
+      profit: null
     };
   },
   created() {
@@ -27,6 +32,9 @@ export default {
         let data = res.data;
         if (data.code) {
           this.userMsg = data.data;
+          //获取profit这个属性
+          let profit = ~~data.data.profit;
+          this.profit = profit.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
         }
       });
     }

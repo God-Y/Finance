@@ -4,27 +4,23 @@ export default {
   //登陆
   login(data) {
     return axios({
-      // url:'/api/login/0',
-      url: "http://106.14.220.166:8080/login/0",
+      url: "/api/login/0",
       method: "post",
-      data: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
+      data: data
     });
   },
   //获取验证码
   getCode(phoneNum) {
-    return axios.post("/code", {
+    return axios.post("/api/code", {
       phone: phoneNum
     });
   },
   //修改密码
   findPwd(data) {
-    return axios.put("/forgetPassword", data);
+    return axios.put("/api/forgetPassword", data);
   },
   //注册账户
   register(data) {
-    return axios.post("/login/1", data);
+    return axios.post("/api/login/1", data);
   }
 };

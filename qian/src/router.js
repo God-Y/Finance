@@ -13,6 +13,8 @@ import bannerDetailed from "./views/Commend/BannerDetailed.vue"; /* banner详情
 import financingList from "./views/Financing/FinancingList.vue"; /* 理财列表 */
 import productList from "./views/Financing/productList.vue"; /* 理财列表 */
 import addList from "./views/Financing/AddList.vue"; /* 理财列表 */
+import TradingFlow from "./views/Me/TradingFlow.vue"; /* 交易流水 */
+import TradingDetial from "./views/Me/TradingDetial.vue"; /* 交易流水详情 */
 Vue.use(Router);
 
 export default new Router({
@@ -63,7 +65,18 @@ export default new Router({
       path: "/me", //我的页面
       name: "me",
       component: MePage
-    } /* 推荐 */,
+    },
+    {
+      path: "/trading-flow/:pages", //交易流水
+      name: "trading-flow",
+      component: TradingFlow
+    },
+    {
+      path: "/trading-detial/:id", //交易流水详情
+      name: "trading-detial",
+      component: TradingDetial
+    },
+    /* 推荐 */
     {
       path: "/bannerDetailed",
       name: "bannerDetailed",

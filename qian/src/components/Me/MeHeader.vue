@@ -1,14 +1,19 @@
 <template>
-  <div class="me-header">
-    <!-- <img src="@/assets/img/user/bg.png" alt=""> -->
-    <div class="photo-box">
-      <div class="photo"></div>
-      <span class="user-name" v-if="user">{{user.idName||user.phone}}</span>
-    </div> 
-    <img src="@/assets/img/user/setUp.png" class="set-up" alt="">
-    <div class="money">
-      <div>总资产（元）</div>
-      <!-- <div>{{}}</div> -->
+  <div>
+    <div class="me-header" v-if="user">
+      <div class="photo-box">
+        <div class="photo"></div>
+        <span class="user-name" >{{user.idName||user.phone}}</span>
+      </div> 
+      <img src="@/assets/img/user/setUp.png" class="set-up" alt="">
+      <div class="money">
+        <div>总资产（元）</div>
+        <div class="assets" >{{user.assets|amount}}</div>
+      </div>
+    </div>
+    <div class="profit">
+      <span>累计收益（元）</span>
+      <span>{{profit}}</span>
     </div>
   </div>
 </template>
@@ -16,14 +21,7 @@
 <script>
 export default {
   name: "MeHeader",
-  props: {
-    userList: Object
-  },
-  computed: {
-    user() {
-      return this.userList;
-    }
-  }
+  props: ["user", "profit"]
 };
 </script>
 <style lang="scss" scoped>
@@ -53,6 +51,33 @@ export default {
       background: red;
       border-radius: 50%;
     }
+  }
+  .money {
+    @extend %po-center;
+    text-align: center;
+    color: #fff;
+    margin-top: 10px;
+    font-size: 13px;
+    .assets {
+      margin-top: 21px;
+      font-size: 30px;
+    }
+  }
+}
+.profit {
+  display: flex;
+  background: #fff;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  height: 50px;
+  span:first-child {
+    font-size: 15px;
+    color: #464c5e;
+  }
+  span:last-child {
+    color: #d4a657;
+    font-size: 17px;
   }
 }
 </style>

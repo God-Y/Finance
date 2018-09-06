@@ -7,5 +7,21 @@ export default {
       url: "/api/u",
       method: "get"
     });
+  },
+  //交易流水，默认为第一页
+  getList(pages = 1) {
+    return axios({
+      url: "/api/u/transaction",
+      method: "get",
+      params: {
+        pageNum: pages
+      }
+    });
+  },
+  getTradingDetial(id) {
+    return axios({
+      url: `/api/u/transaction/${id}`,
+      method: "get"
+    });
   }
 };

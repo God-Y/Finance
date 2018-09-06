@@ -28,7 +28,8 @@ export default {
         phone: "",
         password: "",
         rePassword: "",
-        code: ""
+        code: "",
+        managerNumber: ""
       },
       submitUse: true //提交按钮
     };

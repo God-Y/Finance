@@ -7,6 +7,25 @@ let filtersObj = {
     let day = value.getDate();
     return year + "-" + month + "-" + day;
   },
+  timeSecond: function(date) {
+    let value = new Date(date);
+    let year = value.getFullYear();
+    let month = value.getMonth() + 1; //getMonth是从0开始，所以加+
+    let day = value.getDate();
+    let hour = value.getHours();
+    let Minutes = value.getMinutes();
+    let seconds = value.getSeconds();
+    let twoValue = function(value) {
+      if (value < 10) {
+        return "0" + value;
+      } else {
+        return value;
+      }
+    };
+    return `${year}-${month}-${day} ${twoValue(hour)}:${twoValue(
+      Minutes
+    )}:${twoValue(seconds)}`;
+  },
   amount: function(val) {
     if (val !== undefined) {
       return Number(val)

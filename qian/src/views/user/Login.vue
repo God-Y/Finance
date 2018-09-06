@@ -46,10 +46,10 @@ export default {
       this.$api.user.login(this.user).then(res => {
         console.log(res);
         let data = res.data;
+        this.$toast(data.message);
         if (data.code == 1) {
           //正确登录跳转精品推荐
-        } else {
-          this.$toast(data.message);
+          this.$router.push("/trading-flow/1");
         }
       });
     }
