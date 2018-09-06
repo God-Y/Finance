@@ -27,3 +27,11 @@ body {
 .van-toast {
   top: 80%;
 }
+
+/* 产品详情弹窗样式 */
+.van-button--large {
+  height: 44px !important;
+  background: #D6A956 !important;
+  color: #fff !important;
+  font-size: 17px !important;
+}

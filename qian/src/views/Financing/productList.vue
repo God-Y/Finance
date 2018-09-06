@@ -54,12 +54,12 @@ export default {
   methods: {
     onLoad() {
       console.log("load");
-      this.getPage.pageNum += 1;
-      console.log(this.getPage.pageNum);
+      this.getPage.pageNum += 1; /* 请求的page +1 */
+      this.loading = false;
       setTimeout(() => {
-        this.loading = false;
+        this.loading = true;
         this.getList(this.getPage);
-        // this.finished = true;
+        this.finished = true;
       }, 500);
     },
     getList(data) {
@@ -72,6 +72,10 @@ export default {
     } /* 获取产品列表 */,
     jumpDetailed(id) {
       console.log(id);
+      this.$router.push({
+        path: "/productDetailed",
+        query: { id: id }
+      });
     }
   }
 };

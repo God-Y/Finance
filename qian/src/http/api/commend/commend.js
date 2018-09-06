@@ -20,5 +20,15 @@ export default {
     return axios.get(`/api//app/list/products`, {
       prams: data
     });
+  },
+
+  //获取产品详情
+  getProductDetailed(id) {
+    return axios.get(`/api/app/product/${id}`);
+  },
+
+  //获取合同信息
+  getCompactInfo() {
+    return axios.get(`/api/u/contract-userInfo`);
   }
 };

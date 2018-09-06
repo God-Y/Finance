@@ -13,6 +13,12 @@ import bannerDetailed from "./views/Commend/BannerDetailed.vue"; /* banner详情
 import financingList from "./views/Financing/FinancingList.vue"; /* 理财列表 */
 import productList from "./views/Financing/productList.vue"; /* 理财列表 */
 import addList from "./views/Financing/AddList.vue"; /* 理财列表 */
+import productDetailed from "./views/Financing/productDetailed.vue"; /* 产品详情 */
+import moreDetailed from "./views/Financing/MoreDetailed.vue"; /* 查看更多产品信息 */
+import compactOne from "./views/Financing/compacts/CompactOne.vue"; /* 出借咨询与服务协议 */
+import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
+import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
+
 Vue.use(Router);
 
 export default new Router({
@@ -81,7 +87,34 @@ export default new Router({
         {
           path: "addList",
           component: addList
-        }
+        } /* 增加list */
+      ]
+    },
+    {
+      path: "/productDetailed",
+      name: "productDetailed",
+      component: productDetailed
+    } /* 产品详情 */,
+    {
+      path: "/moreDetailed",
+      name: "moreDetailed",
+      component: moreDetailed
+    } /* 查看更多详情 */,
+    {
+      path: "/compactOne",
+      name: "compactOne",
+      component: compactOne,
+      children: [
+        {
+          path: "signatrue",
+          name: "signatrue",
+          component: signatrue
+        } /* 签名 */,
+        {
+          path: "",
+          name: "compactContent",
+          component: compactContent
+        } /* 合同内容 */
       ]
     }
   ]
