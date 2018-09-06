@@ -15,7 +15,7 @@ import Carousel3d from "vue-carousel-3d";
 Vue.use(Carousel3d); /* 3d轮播 */
 
 Vue.use(VueAwesomeSwiper);
-Vue.use(Vant);
+Vue.use(Vant); /* 轮播 */
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = api; //挂载封装好的api
