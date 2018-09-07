@@ -46,6 +46,25 @@ let filtersObj = {
     if (val !== undefined) {
       return Number(val * 100).toFixed(2);
     }
+  } /* 收益金额 */,
+
+  countTime: function(val) {
+    if (val) {
+      let value = new Date(val);
+      let year = value.getFullYear();
+      let month = ("0" + (value.getMonth() + 1)).slice(-2); //getMonth是从0开始，所以加+
+      let day = ("0" + value.getDate()).slice(-2);
+      return year + "." + month + "." + day;
+    }
+  } /* 日期格式 2018.02.02 */,
+
+  repayment: function(val) {
+    switch (val) {
+      case 10:
+        return "本息一次回款";
+      case 20:
+        return "分期付款";
+    }
   }
 };
 
