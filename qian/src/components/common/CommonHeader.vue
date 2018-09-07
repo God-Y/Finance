@@ -1,5 +1,5 @@
 <template>
-  <div class="header-box">
+  <div class="header-box van-hairline--bottom">
     <img src="@/assets/img/back.png" @click="$router.go(-1)">
     {{title}}
   </div>
@@ -15,8 +15,8 @@ export default {
 <style lang="scss" scoped>
 .header-box {
   position: relative;
+  z-index: 1;
   text-align: center;
-  // font-size: 17px;
   font-size: 17px;
   background: #fff;
   color: $header-color;

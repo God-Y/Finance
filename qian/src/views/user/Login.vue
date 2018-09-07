@@ -49,7 +49,7 @@ export default {
         this.$toast(data.message);
         if (data.code == 1) {
           //正确登录跳转精品推荐
-          this.$router.push("/trading-flow/1");
+          this.$router.push("/me");
         }
       });
     }

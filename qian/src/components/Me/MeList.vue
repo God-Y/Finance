@@ -6,7 +6,9 @@
             <span class="iconfont icon-item" :class="item.icon" ></span>
             <span class="title">{{item.title}}</span>
         </div>
-        <span class="iconfont icon-jiantouyou"></span>
+        <span class="iconfont icon-jiantouyou">
+        </span>
+        <span class="point" v-if="item.id==3 && msgNum > 0"></span>
       </li>
     </ul>
     <div class="phone-container">
@@ -21,6 +23,11 @@
 <script>
 export default {
   name: "MeList",
+  computed: {
+    msgNum() {
+      return this.$store.state.newMsgNum;
+    }
+  },
   data() {
     return {
       list: [
@@ -29,10 +36,10 @@ export default {
           id: 2,
           title: "交 易 流 水",
           icon: "icon-licai-copy",
-          path: "/trading-flow"
+          path: "/trading-flow/1"
         },
-        { id: 3, title: "消 息 中 心", icon: "icon-xiaoxi", path: "" },
-        { id: 4, title: "消 息 中 心", icon: "icon-dian", path: "" }
+        { id: 3, title: "消 息 中 心", icon: "icon-xiaoxi", path: "/message" },
+        { id: 4, title: "账 户 设 置", icon: "icon-dian", path: "" }
       ]
     };
   },
@@ -113,6 +120,14 @@ export default {
         color: #d6b87d;
       }
     }
+  }
+  .point {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 20px;
+    background: red;
+    border-radius: 50%;
   }
 }
 </style>

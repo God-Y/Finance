@@ -28,7 +28,6 @@
       <div ref="pulldown" class="pulldown-wrapper" :style="pullDownStyle" v-if="pullDownRefresh">
         <!-- 这个下拉之前出现气泡 -->
         <div class="before-trigger" v-if="beforePullDown">
-          <!-- <bubble :y="bubbleY"></bubble> -->
           <p class="update-title">松开立即刷新</p>
           <p class="update-title">最后刷新时间：{{lastUpdateTime|timeSecond}}</p>
         </div>
@@ -75,7 +74,7 @@ export default {
       type: null,
       default: function() {
         return {
-          threshold: 30,
+          threshold: 120,
           txt: {
             nomore: "没有更多的数据了",
             more: "上拉加载更多"
@@ -135,7 +134,7 @@ export default {
   },
   created() {
     //这个-50 不知道是用来干嘛的
-    this.pullDownInitTop = -50;
+    this.pullDownInitTop = -56;
   },
   mounted() {
     //数据挂载后执行初始化整个组件
@@ -324,8 +323,8 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  // background: #fff;
   overflow: hidden;
-  background: #fff;
   .scroll-content {
     position: relative;
     z-index: 1;

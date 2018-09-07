@@ -79,8 +79,23 @@ export default new Router({
     },
     {
       path: "/trading-detial/:id", //交易流水详情
-      name: "trading-detial",
+      name: "tradingDetial",
       component: TradingDetial
+    },
+    {
+      path: "/my-investment", //我的投资页面
+      name: "myInvestment",
+      component: () => import("./views/Investment/MyInvestment.vue")
+    },
+    {
+      path: "/investment-detial/:id", //投资详情
+      name: "investment-detial",
+      component: () => import("./views/Investment/InvestDetial.vue")
+    },
+    {
+      path: "/message", //投资详情
+      name: "message",
+      component: () => import("./views/Msg/msg.vue")
     },
     /* 推荐 */
     {

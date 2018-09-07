@@ -26,9 +26,9 @@
         </ul>
     </CommonScrool>
     <div class="noContent-list" v-else>
-    <img src="@/assets/img/user/noContent.png" class="noContent" alt="">
-    <p>暂无交易内容</p>
-  </div>
+      <img src="@/assets/img/user/noContent.png" class="noContent" alt="">
+      <p>暂无交易内容</p>
+    </div>
   </div>
 </template>
  

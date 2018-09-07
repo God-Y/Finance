@@ -46,7 +46,12 @@ let filtersObj = {
     if (val !== undefined) {
       return Number(val * 100).toFixed(2);
     }
-  }
+  },
+  amountInteger: function(val) {
+    if (val !== undefined) {
+      return val.toLocaleString("en-US");
+    }
+  } /* 债权列表出借金额 */
 };
 
 export default filtersObj;

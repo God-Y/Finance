@@ -9,21 +9,44 @@
         <span class="iconfont icon-licai"></span>
         <div class="location">理财</div>
       </li>
-      <li>
+      <router-link tag="li" to="/my-investment">
         <span class="iconfont icon-iconfonttouzi"></span>
         <div class="location">投资</div>
-      </li>
+      </router-link>
       <router-link tag="li" to="/me">
-        <span class="iconfont icon-me"></span>
+        <span class="iconfont icon-me">
+          <span class="point" v-if="msgNum > 0"></span>
+        </span>
         <div class="location">我的</div>
       </router-link>
-     
     </ul>
   </div>
 </template>
 <script>
 export default {
-  name: "CommonFooter"
+  name: "CommonFooter",
+  data() {
+    return {
+      msgNum: 0
+    };
+  },
+  activated() {
+    this.getNewMsg();
+  },
+  methods: {
+    getNewMsg() {
+      this.$api.message.newMsg().then(res => {
+        let data = res.data;
+        if (data.code) {
+          this.msgNum = data.data;
+          this.$store.commit({
+            type: "updatedMsgNum",
+            num: data.data
+          });
+        }
+      });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -38,6 +61,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 60px;
+  z-index: 2;
   background: #fff;
   .footer-list {
     display: flex;
@@ -67,6 +91,15 @@ export default {
         color: #c5c5c5;
       }
     }
+  }
+  .point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    margin-left: -10px;
+    margin-top: 4px;
+    background: red;
+    border-radius: 50%;
   }
 }
 </style>
