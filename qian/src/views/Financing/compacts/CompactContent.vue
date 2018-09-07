@@ -46,20 +46,22 @@ export default {
       userInfo: {
         idName: "吴某某"
       } /* 请求接收到的信息，渲染至合同中 */,
-      signUrl: undefined
+      signUrl: "",
+      bgShow: true
     };
   },
   created() {
+    console.log(this.signUrl);
     this.getInfo(); /* 获取合同信息 */
     this.getSign(); /* 获取签名url */
   },
   activated() {},
   computed: {
     signBg() {
-      if (this.signUrl !== undefined) {
-        return "background: #fff";
+      if (this.signUrl === "") {
+        return { background: "#fff" };
       } else {
-        return "background: #f7f7f7";
+        return { background: "#f7f7f7" };
       }
     }
   } /* 计算属性改变签名box 背景 */,
@@ -79,6 +81,7 @@ export default {
     } /* 跳转至签名页面 */,
     getSign() {
       this.signUrl = JSON.parse(sessionStorage.getItem("url"));
+      console.log(this.signUrl);
     } /* 获取签名 url */
   }
 };
@@ -111,4 +114,11 @@ export default {
   max-width: 100%;
   max-height: 100%;
 } /* 签名 */
+
+.bgOne {
+  background: #f7f7f7;
+}
+.bgTwo {
+  background: #fff;
+}
 </style>

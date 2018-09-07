@@ -18,7 +18,7 @@ export default {
   //获取产品列表
   getProductList(data) {
     return axios.get(`/api//app/list/products`, {
-      prams: data
+      params: data
     });
   },
 
@@ -30,5 +30,12 @@ export default {
   //获取合同信息
   getCompactInfo() {
     return axios.get(`/api/u/contract-userInfo`);
+  },
+
+  //收益计算
+  getIncome(data) {
+    return axios.get(`/api/u/installment-Calculator`, {
+      params: data
+    });
   }
 };

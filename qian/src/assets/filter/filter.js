@@ -51,7 +51,26 @@ let filtersObj = {
     if (val !== undefined) {
       return val.toLocaleString("en-US");
     }
-  } /* 债权列表出借金额 */
+  } /* 债权列表出借金额 */,
+
+  countTime: function(vals) {
+    if (vals !== undefined) {
+      let value = new Date(vals);
+      let year = value.getFullYear();
+      let month = ("0" + (value.getMonth() + 1)).slice(-2); //getMonth是从0开始，所以加+
+      let day = ("0" + value.getDate()).slice(-2);
+      return year + "." + month + "." + day;
+    }
+  } /* 日期格式 2018.02.02 */,
+
+  repayment: function(val) {
+    switch (val) {
+      case 10:
+        return "本息一次回款";
+      case 20:
+        return "分期付款";
+    }
+  }
 };
 
 export default filtersObj;

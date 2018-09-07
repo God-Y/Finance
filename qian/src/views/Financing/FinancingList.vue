@@ -11,12 +11,17 @@
         <router-view></router-view>
       </van-tab>
     </van-tabs>
+    <footerCommon></footerCommon>
   </div>
 </template>
  
 <script>
+import footerCommon from "common/CommonFooter.vue";
 export default {
   name: "dinancingList",
+  components: {
+    footerCommon
+  },
   data() {
     return {
       active: ""
