@@ -13,6 +13,9 @@ import bannerDetailed from "./views/Commend/BannerDetailed.vue"; /* banner详情
 import financingList from "./views/Financing/FinancingList.vue"; /* 理财列表 */
 import productList from "./views/Financing/productList.vue"; /* 理财列表 */
 import addList from "./views/Financing/AddList.vue"; /* 理财列表 */
+import productCount from "./views/Financing/ProductCount.vue"; /* 计算收益 */
+import conutOne from "./views/Financing/productCount/CountOne.vue"; /* 计算页面一 */
+import conutTwo from "./views/Financing/productCount/CountTwo.vue"; /* 计算页面一 */
 import TradingFlow from "./views/Me/TradingFlow.vue"; /* 交易流水 */
 import TradingDetial from "./views/Me/TradingDetial.vue"; /* 交易流水详情 */
 import productDetailed from "./views/Financing/productDetailed.vue"; /* 产品详情 */
@@ -104,6 +107,30 @@ export default new Router({
       ]
     },
     {
+      path: "/productCount",
+      component: productCount,
+      meta: {
+        keepAlive: false // 不需要被缓存
+      },
+      children: [
+        {
+          path: "",
+          component: conutOne,
+          meta: {
+            keepAlive: false // 不需要被缓存
+          }
+        } /* 计算金额 */,
+        {
+          path: "/productCount/conutTwo",
+          name: "conutTwo",
+          component: conutTwo,
+          meta: {
+            keepAlive: false // 不需要被缓存
+          }
+        } /* 分月计算金额页面 */
+      ]
+    },
+    {
       path: "/productDetailed",
       name: "productDetailed",
       component: productDetailed
@@ -115,7 +142,7 @@ export default new Router({
     } /* 查看更多详情 */,
     {
       path: "/compactOne",
-      name: "compactOne",
+      // name: "compactOne",
       component: compactOne,
       children: [
         {

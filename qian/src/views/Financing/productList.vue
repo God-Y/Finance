@@ -12,7 +12,7 @@
           <p class="product-title">{{temp.name}}</p>
           <div class="line-style">
             <div>
-              <span class="income">{{temp.annualizedIncome}}</span>
+              <span class="income">{{temp.annualizedIncome  | income}}</span>
               <span>预期年化&#12288;(%)</span>
             </div>
             <div>
@@ -47,7 +47,10 @@ export default {
     };
   },
   created() {
-    this.getList("");
+    this.getList(this.getPage);
+  },
+  activated() {
+    this.getList(this.getPage);
   },
   computed: {},
   mounted() {},

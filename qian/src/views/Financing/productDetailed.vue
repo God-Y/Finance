@@ -3,7 +3,7 @@
     <div class="linear-gradient">
       <div class="header-box">
         <img src="@/assets/img/productDetailed/back.png" @click="$router.go(-1)">
-        <span>北京中信基金</span>
+        <span>{{detailedData.name}}</span>
       </div>
       <div class="line-title">预期年化收益率</div>
       <div class="income">{{detailedData.annualizedIncome | income}}<span>%</span></div>
@@ -29,28 +29,28 @@
           <img class="repay" src="@/assets/img/productDetailed/repay.png" alt="">
           <span>还款方式</span>
         </div>
-        <span>{{detailedData.repaymentMode}}</span>
+        <span>{{detailedData.repaymentMode | repayment}}</span>
       </li>
       <li>
         <div>
           <img class="clock" src="@/assets/img/productDetailed/clock.png" alt="">
           <span>起息日期</span>
         </div>
-        <span>{{detailedData.valueDate}}</span>
+        <span>{{countDateStart | countTime}}</span>
       </li>
       <li>
         <div>
           <img class="repayway" src="@/assets/img/productDetailed/repayWay.png" alt="">
           <span>回款日期</span>
         </div>
-        <span>2017-11-07</span>
+        <span>{{countDateEnd | countTime}}</span>
       </li>
       <li>
         <div>
           <img class="info" src="@/assets/img/productDetailed/info.png" alt="">
           <span>产品备注</span>
         </div>
-        <span>{{detailedData.remark}}</span>
+        <span>{{detailedData.describe}}</span>
       </li>
       <li>
         <div>
@@ -72,7 +72,7 @@
       </div>
     </van-dialog>
     <div class="footer">
-        <img class="counter" src="@/assets/img/productDetailed/counter.png" alt="">
+        <img @click="jumpCount" class="counter" src="@/assets/img/productDetailed/counter.png" alt="">
         <van-button class="button" type="warning">立即投资</van-button>
     </div>
   </div>
@@ -84,19 +84,38 @@ export default {
   data() {
     return {
       detailedData: "",
-      show: false
+      dateStart: Date.now(), //当前日期
+      show: false /* 查看合同 */
     };
   },
   created() {
     this.getDetailed();
   },
-  computed: {},
+  computed: {
+    countDateStart() {
+      let valueDate = this.detailedData.valueDate;
+      switch (valueDate) {
+        case 10:
+          return this.dateStart;
+        case 20:
+          return this.dateStart + 1 * 24 * 60 * 60 * 1000;
+        case 30:
+          return this.dateStart + 2 * 24 * 60 * 60 * 1000;
+      }
+    }, //计算起息日期
+    countDateEnd() {
+      let deadline = this.detailedData.deadline;
+      return this.dateStart + deadline * 24 * 60 * 60 * 1000;
+    } //计算到期日期
+  },
   mounted() {},
   methods: {
     getDetailed() {
       let id = this.$route.query.id;
+      console.log(id);
       this.$api.commend.getProductDetailed(id).then(res => {
-        this.detailedData = res.data.data;
+        console.log(res);
+        this.detailedData = res.data.data[1];
         console.log(this.detailedData);
       });
     } /* 获取产品详情 */,
@@ -115,7 +134,14 @@ export default {
       this.$router.push({
         path: "/compactOne"
       });
-    }
+    } /* 跳转至合同页面 */,
+    jumpCount() {
+      let id = this.$route.query.id; /* 产品id */
+      this.$router.push({
+        path: "/productCount",
+        query: { id: id, name: this.detailedData.name }
+      });
+    } /* 计算页面 */
   }
 };
 </script>
