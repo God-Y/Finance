@@ -10,8 +10,8 @@ export default {
       }
     });
   },
-  //根据ID获取详情
+  //根据ID获取
   investDetial(id) {
-    return axios.get(`/api/u/userInvestment/${id}`);
+    return axios.get(`/api/u/investment/${id}`);
   }
 };

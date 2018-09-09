@@ -63,7 +63,7 @@ export default {
       type: null,
       default: function() {
         return {
-          threshold: 120,
+          threshold: 90,
           stop: 50,
           txt: "刷新以完成完成"
         };

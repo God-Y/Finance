@@ -18,8 +18,14 @@ export default {
     if (!this.scroll) {
       this.$nextTick(() => {
         this.scroll = new BScroll(this.$refs.wrapper, {
-          click: true
-          // tap: true
+          tap: true
+        });
+        this.scroll.on("touchEnd", function() {
+          clearTimeout(this.Loop);
+        });
+        this.scroll.on("beforeScrollStart", () => {
+          clearTimeout(this.Loop);
+          this.Loop = setTimeout(() => {}, 2000);
         });
       });
     } else {

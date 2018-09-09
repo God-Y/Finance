@@ -5,8 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    netWork: true,
-    newMsgNum: 0
+    netWork: true, //判断是否有网
+    newMsgNum: 0,
+    readName: null
   },
   mutations: {
     changeNetwork(state, canUse) {

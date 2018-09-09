@@ -4,7 +4,10 @@
    <msg-list>
      <ul>
        <template v-for="item in List">
-        <li v-if="item.code" :key="item.gmtCreate" @touchStart="one()" @touchEnd="two()">
+        <li v-if="item.code" :key="item.gmtCreate" 
+        @tap="tap" 
+        @touchstart="timeStart()" 
+        @touchend="timeEnd()">
           <div class="item-top van-hairline--bottom">
             <span class="msg-title">{{getStatus(item.code)}}</span>
             <span class="date">{{item.gmtCreate|time}}</span>
@@ -41,16 +44,19 @@ export default {
   },
   data() {
     return {
-      List: []
+      List: {},
+      timer: null,
+      start: 0,
+      end: 0
     };
   },
   activated() {
     this.getMsg();
   },
+  computed: {},
   methods: {
     getMsg() {
       this.$api.message.getMsg().then(res => {
-        // console.log(res.data)
         let data = res.data;
         if (data.code) {
           this.List = data.data;
@@ -73,10 +79,34 @@ export default {
           return "回款失败";
       }
     },
-    claa() {
-      console.log(1);
+    timeStart() {
+      //计算开始时间
+      clearTimeout(this.timer);
+      this.start = new Date().valueOf();
+      this.timer = setTimeout(() => {
+        this.$dialog
+          .confirm({
+            message: "是否删除该条信息"
+          })
+          .then(() => {})
+          .catch(() => {
+            this.$toast("取消操作");
+          });
+      }, 400);
     },
-    one() {}
+    timeEnd() {
+      //计算结束时间
+      clearTimeout(this.timer);
+      this.end = new Date().valueOf();
+    },
+    tap() {
+      let duration = this.end - this.start;
+      if (duration > 400) {
+        console.log("出现传入页面");
+      } else {
+        console.log("出现单击事件");
+      }
+    }
   }
 };
 </script>

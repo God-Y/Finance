@@ -31,7 +31,12 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, title: "银行卡管理", icon: "icon-yinhangqia", path: "" },
+        {
+          id: 1,
+          title: "银行卡管理",
+          icon: "icon-yinhangqia",
+          path: "/backCard-manage"
+        },
         {
           id: 2,
           title: "交 易 流 水",

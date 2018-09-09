@@ -5,7 +5,7 @@ let filtersObj = {
     let year = value.getFullYear();
     let month = value.getMonth() + 1; //getMonth是从0开始，所以加+
     let day = value.getDate();
-    return year + "-" + month + "-" + day;
+    return year + " - " + month + " - " + day;
   },
   timeSecond: function(date) {
     let value = new Date(date);

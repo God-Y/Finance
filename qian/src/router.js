@@ -96,6 +96,16 @@ export default new Router({
       component: () => import("./views/Investment/InvestDetial.vue")
     },
     {
+      path: "/backCard-manage", //银行卡
+      name: "backCard-manage",
+      component: () => import("./views/BankCard/BankCardManage.vue")
+    },
+    {
+      path: "/add-backCard", //银行卡
+      name: "add-backCard",
+      component: () => import("./views/BankCard/AddBankCard.vue")
+    },
+    {
       path: "/message", //投资详情
       name: "message",
       component: () => import("./views/Msg/msg.vue")
