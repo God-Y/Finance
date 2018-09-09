@@ -12,7 +12,7 @@ import MePage from "./views/Me/Me.vue"; /* 推荐页 */
 import bannerDetailed from "./views/Commend/BannerDetailed.vue"; /* banner详情页 */
 import financingList from "./views/Financing/FinancingList.vue"; /* 理财列表 */
 import productList from "./views/Financing/productList.vue"; /* 理财列表 */
-import addList from "./views/Financing/AddList.vue"; /* 理财列表 */
+import addList from "./views/Financing/AddList.vue"; /* 续投列表 */
 import productCount from "./views/Financing/ProductCount.vue"; /* 计算收益 */
 import conutOne from "./views/Financing/productCount/CountOne.vue"; /* 计算页面一 */
 import conutTwo from "./views/Financing/productCount/CountTwo.vue"; /* 计算页面一 */
@@ -108,11 +108,10 @@ export default new Router({
     } /* 推荐banner图详情 */,
     {
       path: "/financingList",
-      name: "financingList",
       component: financingList,
       children: [
         {
-          path: "productList",
+          path: "",
           component: productList
         } /* 产品列表 */,
         {
@@ -171,6 +170,11 @@ export default new Router({
           component: compactContent
         } /* 合同内容 */
       ]
-    }
+    },
+    {
+      path: "/renewal",
+      name: "renewal",
+      component: () => import("./views/Financing/renewal/ProductRenewal.vue")
+    } /* 产品续投 */
   ]
 });

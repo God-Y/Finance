@@ -35,7 +35,7 @@ export default {
       switch (index) {
         case 0:
           this.$router.push({
-            path: "/financingList/productList"
+            path: "/financingList"
           }); /* 产品列表 */
           break;
         case 1:
@@ -61,6 +61,7 @@ export default {
   border-bottom: 1px solid #d9d9d9;
 }
 .content {
+  // height: 80vh;
   padding-bottom: 15px;
 }
 </style>
