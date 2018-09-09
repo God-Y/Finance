@@ -3,11 +3,11 @@ import axios from "@/http/http"; //导入创建好的axios实例
 export default {
   //获取轮播图
   GetCommendImg() {
-    return axios.get(`/api/banners`);
+    return axios.get(`/api/app/list/banners`);
   },
   //获取产品推荐
   productCommend() {
-    return axios.get(`/api/product/recommended`);
+    return axios.get(`/api/app/products/recommend`);
   },
 
   //获取banner详情
@@ -17,13 +17,14 @@ export default {
 
   //获取产品列表
   getProductList(data) {
-    return axios.get(`/api//app/list/products`, {
+    return axios.get(`/api/app/list/products`, {
       params: data
     });
   },
 
   //获取产品详情
   getProductDetailed(id) {
+    console.log(id);
     return axios.get(`/api/app/product/${id}`);
   },
 
@@ -35,6 +36,13 @@ export default {
   //收益计算
   getIncome(data) {
     return axios.get(`/api/u/installment-Calculator`, {
+      params: data
+    });
+  },
+
+  //获取续投详情
+  getRenewalProducts(data) {
+    return axios.get(`/api/u/list/renewal-products`, {
       params: data
     });
   }
