@@ -5,10 +5,10 @@
         <span class="iconfont icon-tuijian"></span>
         <div class="location">推荐</div>
       </router-link>
-      <li>
+      <router-link tag="li" to="/financingList">
         <span class="iconfont icon-licai"></span>
         <div class="location">理财</div>
-      </li>
+      </router-link>
       <router-link tag="li" to="/my-investment">
         <span class="iconfont icon-iconfonttouzi"></span>
         <div class="location">投资</div>
@@ -57,7 +57,7 @@ export default {
   }
 }
 .common-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 60px;
