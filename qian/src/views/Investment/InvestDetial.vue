@@ -67,7 +67,7 @@ export default {
   }
   .button-box {
     margin-top: 20px;
-    padding: 0 15px; 
+    padding: 0 15px;
     .button-style {
       width: 100%;
     }

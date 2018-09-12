@@ -49,6 +49,16 @@ export default {
         this.$toast(data.message);
         if (data.code == 1) {
           //正确登录跳转精品推荐
+          this.getUser();
+        }
+      });
+    },
+    //获取数据，往仓库中更新数据
+    getUser() {
+      this.$api.me.getMsg().then(res => {
+        let data = res.data;
+        if (data.code) {
+          this.$store.commit("getUser", data.data);
           this.$router.push("/me");
         }
       });

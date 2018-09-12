@@ -1,13 +1,21 @@
 <template>
     <div class="noContent-list">
       <img src="@/assets/img/user/noContent.png" class="noContent" alt="">
-      <p>暂无交易内容</p>
+      <p>{{title}}</p>
     </div>
 </template>
  
 <script>
 export default {
-  name: "CommonNoContent"
+  name: "CommonNoContent",
+  props: {
+    title: {
+      type: String,
+      default() {
+        return "暂无交易内容";
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

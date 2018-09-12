@@ -23,12 +23,18 @@ import moreDetailed from "./views/Financing/MoreDetailed.vue"; /* 查看更多�
 import compactOne from "./views/Financing/compacts/CompactOne.vue"; /* 出借咨询与服务协议 */
 import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
 import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
+import SearchCity from "./views/SearchCity/SearchCity.vue"; /* 合同内容 */
+import Payment from "./views/Paymment/Patment.vue"; /* 合同内容 */
+
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: [
     {
       path: "/",
@@ -106,9 +112,24 @@ export default new Router({
       component: () => import("./views/BankCard/AddBankCard.vue")
     },
     {
-      path: "/message", //投资详情
+      path: "/search-city", //搜索城市
+      name: "search-sity",
+      component: SearchCity
+    },
+    {
+      path: "/message", //信息管理
       name: "message",
       component: () => import("./views/Msg/msg.vue")
+    },
+    {
+      path: "/check-msg/:id", //查看更多的信息
+      name: "check-msg",
+      component: () => import("./views/Msg/CheckPlat.vue")
+    },
+    {
+      path: "/payment/:id", //支付模块
+      name: "payment",
+      component: Payment
     },
     /* 推荐 */
     {

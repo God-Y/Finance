@@ -4,10 +4,14 @@
    <msg-list>
      <ul>
        <template v-for="item in List">
-        <li v-if="item.code" :key="item.gmtCreate" 
-        @tap="tap" 
-        @touchstart="timeStart()" 
-        @touchend="timeEnd()">
+        <li 
+          v-if="item.code" 
+          :key="item.gmtCreate" 
+          @tap="tapUser(item.id)" 
+          @touchstart="timeStart(item.id,0)" 
+          @touchend="timeEnd()"
+          :class="[item.look ==10 ?'isLook':'']"
+        >
           <div class="item-top van-hairline--bottom">
             <span class="msg-title">{{getStatus(item.code)}}</span>
             <span class="date">{{item.gmtCreate|time}}</span>
@@ -17,7 +21,14 @@
             <span class="iconfont icon-jiantouyou"></span>
           </div>
         </li>
-        <li v-else :key="item.gmtCreate">
+        <li 
+          v-else 
+          :key="item.gmtCreate"
+          @tap="tapPlat(item.id)" 
+          @touchstart="timeStart(item.id,1)" 
+          @touchend="timeEnd()"
+          :class="[item.look ==10 ?'isLook':'']"
+        >
           <div class="item-top">
             <span class="msg-title">活动消息</span>
             <span class="date">{{item.gmtCreate|time}}</span>
@@ -79,7 +90,7 @@ export default {
           return "回款失败";
       }
     },
-    timeStart() {
+    timeStart(id, index) {
       //计算开始时间
       clearTimeout(this.timer);
       this.start = new Date().valueOf();
@@ -88,7 +99,35 @@ export default {
           .confirm({
             message: "是否删除该条信息"
           })
-          .then(() => {})
+          .then(() => {
+            //判断时候用户消息
+            if (index == 0) {
+              this.$api.message.userMsg(id, 20).then(res => {
+                console.log(res);
+                let data = res.data;
+                if (data.code) {
+                  //调用一次promise，然后先出现提示消息然后去执行请求数据
+                  this.$toast.success("删除成功");
+                  setTimeout(() => {
+                    this.getMsg();
+                  }, 500);
+                }
+              });
+            } else {
+              //判断时候平台消息
+              this.$api.message.deleteImgMsg(id).then(res => {
+                console.log(res);
+                let data = res.data;
+                if (data.code) {
+                  //调用一次promise，然后先出现提示消息然后去执行请求数据
+                  this.$toast.success("删除成功");
+                  setTimeout(() => {
+                    this.getMsg();
+                  }, 500);
+                }
+              });
+            }
+          })
           .catch(() => {
             this.$toast("取消操作");
           });
@@ -99,13 +138,32 @@ export default {
       clearTimeout(this.timer);
       this.end = new Date().valueOf();
     },
-    tap() {
+    //用户消息
+    tapUser(id) {
       let duration = this.end - this.start;
-      if (duration > 400) {
-        console.log("出现传入页面");
-      } else {
-        console.log("出现单击事件");
+      //小于400ms触发点击事件
+      if (duration < 400) {
+        this.$api.message.userMsg(id, 10).then(res => {
+          let data = res.data;
+          if (data.code) {
+            this.$router.push(`/investment-detial/${id}`);
+          }
+        });
       }
+    },
+    //平台消息
+    tapPlat(id) {
+      let duration = this.end - this.start;
+      //触发平台消息，获取长图片
+      if (duration < 400) {
+        console.log(161616);
+        this.$router.push(`/check-msg/${id}`);
+      }
+    },
+    toInvest(id) {
+      this.$api.message.userMsg(id).then(res => {
+        console.log(res);
+      });
     }
   }
 };
@@ -136,6 +194,9 @@ export default {
       color: #999999;
       font-size: 12px;
     }
+  }
+  .isLook {
+    background: #d8d8d8;
   }
 }
 </style>

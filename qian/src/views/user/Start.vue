@@ -12,7 +12,7 @@
     <div class="swiper-pagination"  slot="pagination"></div>
     <div class="swiper-scrollbar"   slot="scrollbar"></div>
   </swiper>
-  <van-button size="large" class="go-btn" @click="go" v-if="goBtnShow">立即进入</van-button>
+  <van-button size="large" class="go-btn" type="warning" @click="go" v-if="goBtnShow">立即进入</van-button>
   </div>
 </template>
  
