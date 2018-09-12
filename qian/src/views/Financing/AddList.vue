@@ -1,15 +1,6 @@
 <template>
   <div>
-    <div v-if="productList.length==0" class="content-box">
-      <div>
-        <img class="blank-photo" src="@/assets/img/productDetailed/blankPhoto.png" alt="">
-      </div>
-      <div>暂无可续投产品，赶紧投资吧！</div>
-      <div>
-        <van-button class="button-style" type="warning">立即投资</van-button>
-      </div>
-    </div>
-    <div v-else>
+    <div v-if="productList.length">
       <CommonScrool
       class="list-box"
       @pullingUp="pullingUp"
@@ -34,6 +25,15 @@
         </div>
       </div>
       </CommonScrool>
+    </div>
+    <div v-else class="content-box">
+      <div>
+        <img class="blank-photo" src="@/assets/img/productDetailed/blankPhoto.png" alt="">
+      </div>
+      <div>暂无可续投产品，赶紧投资吧！</div>
+      <div>
+        <van-button class="button-style" type="warning">立即投资</van-button>
+      </div>
     </div>
   </div>
 </template>
@@ -93,10 +93,11 @@ export default {
         this.dirty = false;
       }
     } /* 上拉刷新 */,
-    jumpDetailed() {
-      // this.$router.push({
-      // path: "/renewalDetailed"
-      // });
+    jumpDetailed(id) {
+      this.$router.push({
+        path: "/renewalDetailed",
+        query: { id: id }
+      });
     }
   }
 };

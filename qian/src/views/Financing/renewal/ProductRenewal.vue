@@ -6,51 +6,51 @@
         <p>新手体验计划</p>
         <ul>
           <li>
-            <span>10.00</span>
+            <span>{{productData.annualizedIncome | income}}</span>
             <span>预期年化（%）</span>
           </li>
           <li>
-            <span>3</span>
+            <span>{{amountDate}}</span>
             <span>理财期限（月）</span>
           </li>
           <li>
-            <span>50,000.00</span>
+            <span>{{productData.startingAmount | amount}}</span>
             <span>起投金额（元）</span>
           </li>
         </ul>
       </div>
-      <div>
-        <ul>
+      <div class="incomeInfo-box">
+        <ul class="date-style">
           <li>
             <span>起息日期</span>
-            <span>2016.11.07</span>
+            <span>{{productData.valueDateStart | countTime}}</span>
           </li>
-          <li></li>
+          <li class="vertical-line"></li>
           <li>
             <span>到期日期</span>
-            <span>2017.11.08</span>
+            <span>{{productData.valueDateEnd | countTime}}</span>
           </li>
         </ul>
-        <p>300.00</p>
-        <p>预期收益</p>
+        <p class="income-num">{{productData.expectedIncome | amount}}</p>
+        <p class="income-title">预期收益</p>
       </div>
-      <div>
+      <div class="bank-info">
         <span>回款至</span>
-        <span>工商银行<span>（尾号2508）</span></span>
+        <span class="bank-select">{{productData.bankName}}<span>（尾号{{ productData.bankCardNumber | tailNum}}）</span></span>
       </div>
-      <div>
-        <van-checkbox v-model="checked">
+      <div class="select-compact">
+        <van-checkbox class="check-content" v-model="checked">
           本人已认真阅读并同意
-          <a>《xxxxxxx协议》</a>
         </van-checkbox>
+        <a @click="lookCompact">《xxxxxxx协议》</a>
       </div>
-      <p>
+      <p class="describe">
         <span>备注：</span>
         续投会在投资到期时将投资本金自动转入下次投资中，利息照常回款。
       </p>
-      <div>
-        <p>投资本金<span>¥ 1000.00</span></p>
-        <van-button type="warning">确定</van-button>
+      <div class="button-box">
+        <p>投资本金<span>¥ {{productData.investmentAmount | amount}}</span></p>
+        <van-button @click="confirm" class="button" type="warning">确定</van-button>
       </div>
     </main>
   </div>
@@ -64,14 +64,48 @@ export default {
   },
   data() {
     return {
-      checked: true
+      checked: true,
+      productData: ""
     };
   },
   activated() {},
-  created() {},
-  computed: {},
+  created() {
+    this.productInfo();
+  },
+  computed: {
+    amountDate() {
+      return (
+        Math.abs(
+          this.productData.valueDateEnd - this.productData.valueDateStart
+        ) /
+        86400000 /
+        30
+      ).toFixed(0);
+    } /* 计算理财期限 */
+  },
   mounted() {},
-  methods: {},
+  methods: {
+    productInfo() {
+      let id = this.$route.query.id;
+      this.$api.commend.renewalData(id).then(res => {
+        console.log(res);
+        this.productData = res.data.data[1];
+        console.log(this.productData);
+      });
+    } /* 获取续投产品信息 */,
+    lookCompact() {
+      this.$router.push({
+        path: "/compactOne"
+      });
+    } /* 查看合同 */,
+    confirm() {
+      let id = this.$route.query.id;
+      this.$router.push({
+        path: "/compactOne",
+        query: { id: id, status: "renewal" }
+      });
+    }
+  },
   watch: {}
 };
 </script>
@@ -84,6 +118,7 @@ export default {
 }
 $width: 100%/3;
 .info-box {
+  margin-bottom: 10px;
   padding: 15px 27px 15px 17px;
   background: #fff;
   & > p {
@@ -137,5 +172,111 @@ $width: 100%/3;
       }
     } /* 第三个li标签 */
   }
+}
+.incomeInfo-box {
+  margin-bottom: 10px;
+  background: #fff;
+}
+.vertical-line {
+  width: 1px;
+  height: 30px;
+  background: #e8e8e8;
+}
+.date-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 67px 20px 67px;
+  border-bottom: 1px solid #e8e8e8;
+  & > li {
+    display: flex;
+    flex-wrap: wrap;
+    & > span {
+      flex-basis: 100%;
+      text-align: center;
+    }
+    & > span:nth-child(1) {
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #666;
+    }
+    & > span:nth-child(2) {
+      font-size: 13px;
+      color: #999;
+    }
+  }
+}
+.income-num {
+  margin-top: 10px !important;
+  margin-bottom: 12px !important;
+  text-align: center;
+  font-size: 20px;
+  color: #dfae61;
+}
+.income-title {
+  padding-bottom: 10px !important;
+  text-align: center;
+  color: #666;
+  font-size: 15px;
+}
+.bank-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  & > span:nth-child(1) {
+    font-size: 14px;
+    color: #999;
+  }
+}
+.bank-select {
+  font-size: 14px;
+  color: #666;
+  span {
+    color: #999;
+  }
+}
+.select-compact {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  margin-bottom: 69px;
+  a {
+    color: #0da8ff;
+  }
+}
+.check-content {
+  font-size: 12px;
+  color: #666;
+}
+.describe {
+  padding: 0 37px 0 15px;
+  font-size: 12px;
+  color: #999999;
+  span {
+    color: #666;
+  }
+}
+.button-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding: 8px 15px;
+  background: #fff;
+  > p {
+    vertical-align: middle;
+    font-size: 15px;
+    color: #666;
+    > span {
+      margin-left: 10px;
+      color: #d7a863;
+    }
+  }
+}
+.button {
+  width: 100px;
+  height: 44px;
 }
 </style>

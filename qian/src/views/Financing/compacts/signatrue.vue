@@ -29,13 +29,14 @@ export default {
   },
   created() {},
   mounted() {
-    this.canvasBox = document.getElementById("canvasBox");
+    // this.canvasBox = document.getElementById("canvasBox");
     this.initCanvas();
   },
   computed: {},
   methods: {
     initCanvas() {
       const canvas = document.querySelector("canvas");
+      console.log(canvas);
       this.draw = new Draw(canvas, -this.degree);
     },
     //初始化canvas画布，支持手写，并重置坐标系
