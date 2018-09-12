@@ -4,7 +4,7 @@
       <h4>出借咨询与服务协议</h4>
       <p>本协议由以下双方于______年______月______日在中华人民共和国北京市朝阳区签署 </p>
       <p>甲方（出借人）： <span v-if="userInfo.idName">{{userInfo.idName}}</span></p>
-      <p>证件类型<span>{{userInfo.type}}</span></p> 
+      <p>证件类型：<span>{{userInfo.type}}</span></p> 
       <p>证件号：<span>{{userInfo.idNumber}}</span></p>
       <p>乙方：信和上融网络科技（北京）有限公司 </p>
       <p>住所地：北京市朝阳区东三环北路甲19号嘉盛中心3603室 </p>
@@ -27,38 +27,54 @@
       <div class="footer-style">
         <div class="sign-box">
           <span>甲方(电子签章)：</span>
-          <div @click="jumpSignatrue" :style="signBg" class="sign"><img class="sign-style" :src=signUrl alt=""></div>
+          <div @click="jumpSignatrue" :style="signBg" class="sign"><img class="sign-style" :src=userInfo.contactSign alt=""></div>
         </div>
         <div class="sign-box">
           <span>乙方(电子签章)：</span>
           <img :src=userInfo.companySeal alt="">
         </div>
       </div>
+      <div>
+        <van-button v-if="status" @click="submit" class="button" type="warning">提交</van-button>
+      </div>
     </div>
   </div>
 </template>
  
 <script>
+import { Toast } from "vant";
 export default {
   name: "compactContent",
   data() {
     return {
       userInfo: {
-        idName: "吴某某"
+        contactSign: "1 "
       } /* 请求接收到的信息，渲染至合同中 */,
-      signUrl: "",
-      bgShow: true
+      sendData: {},
+      status: false
     };
   },
   created() {
-    console.log(this.signUrl);
+    // this.status = false;
+    // console.log(this.$route.query.status);
+    // if (this.$route.query.status) {
+    //   this.status = true;
+    // }
+    // this.getInfo(); /* 获取合同信息 */
+    // this.getSign(); /* 获取签名url */
+  },
+  activated() {
+    this.status = false;
+    console.log(this.$route.query.status);
+    if (this.$route.query.status) {
+      this.status = true;
+    }
     this.getInfo(); /* 获取合同信息 */
     this.getSign(); /* 获取签名url */
   },
-  activated() {},
   computed: {
     signBg() {
-      if (this.signUrl === "") {
+      if (this.userInfo.contactSign) {
         return { background: "#fff" };
       } else {
         return { background: "#f7f7f7" };
@@ -69,10 +85,16 @@ export default {
   methods: {
     getInfo() {
       //获取id传至请求方法中
-      this.$api.commend.getCompactInfo().then(res => {
-        console.log(res);
-        this.userInfo = res.data.data;
-      });
+      let id = this.$route.query.id;
+      console.log(id);
+      if (id) {
+        this.$api.commend.getCompactInfo(id).then(res => {
+          console.log(res);
+          if (res.data.data != null) {
+            this.userInfo = res.data.data;
+          }
+        });
+      }
     } /* 获取合同信息 */,
     jumpSignatrue() {
       this.$router.push({
@@ -80,15 +102,25 @@ export default {
       });
     } /* 跳转至签名页面 */,
     getSign() {
-      this.signUrl = JSON.parse(sessionStorage.getItem("url"));
-      console.log(this.signUrl);
-    } /* 获取签名 url */
+      this.userInfo.contactSign = JSON.parse(sessionStorage.getItem("url"));
+      console.log(this.userInfo.contactSign);
+    } /* 获取签名 url */,
+    submit() {
+      this.sendData.id = this.$route.query.id;
+      this.sendData.contactSign = this.userInfo.contactSign;
+      this.$api.commend.renewalInvestment(this.sendData).then(res => {
+        console.log(res.data);
+        if (res.data.code != 1) {
+          Toast.fail(res.data.message);
+        }
+      });
+    } /* 产品续投 */
   }
 };
 </script>
 <style lang="scss" scoped>
 .compact-content {
-  padding: 0 10px 90px 15px;
+  padding: 0 15px 90px 15px;
   background: #fff;
   h4 {
     margin: 0;
@@ -100,6 +132,7 @@ export default {
 .footer-style {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 } /* 签章 box */
 .sign-box {
   display: flex;
@@ -120,5 +153,8 @@ export default {
 }
 .bgTwo {
   background: #fff;
+} /* img签名背景色 */
+.button {
+  width: 100%;
 }
 </style>

@@ -70,6 +70,13 @@ let filtersObj = {
       case 20:
         return "分期付款";
     }
+  },
+
+  //银行卡 尾数
+  tailNum(num) {
+    if (num) {
+      return num.slice(-4);
+    }
   }
 };
 

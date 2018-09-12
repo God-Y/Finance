@@ -29,8 +29,8 @@ export default {
   },
 
   //获取合同信息
-  getCompactInfo() {
-    return axios.get(`/api/u/contract-userInfo`);
+  getCompactInfo(id) {
+    return axios.get(`/api/u/investment-contract/${id}`);
   },
 
   //收益计算
@@ -40,9 +40,19 @@ export default {
     });
   },
 
-  //获取续投详情
+  //获取续投详情列表
   getRenewalProducts(data) {
     return axios.get(`/api/u/list/renewal-products`, {
+      params: data
+    });
+  },
+
+  renewalData(id) {
+    return axios.get(`/api/u/renewal/investment-user/${id}`);
+  } /* 续投产品详情 */,
+
+  renewalInvestment(data) {
+    return axios.post(`/api/u/renewal-investment-user`, {
       params: data
     });
   }

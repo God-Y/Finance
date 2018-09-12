@@ -9,7 +9,7 @@ function Draw(canvas, degree, config = {}) {
     return;
   }
   let { width, height } = window.getComputedStyle(canvas, null);
-  console.log(canvas);
+  console.log(width, height);
   width = width.replace("px", "");
   height = height.replace("px", "");
 

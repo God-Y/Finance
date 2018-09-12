@@ -7,7 +7,7 @@
     <invest-top-list :data="data"></invest-top-list>
     <Invest-middle-list :list='data'></Invest-middle-list>
     <div class="button-box">
-      <van-button class="button-style" type="warning">立即投资</van-button>
+      <van-button @click="invest" class="button-style" type="warning">立即投资</van-button>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ import InvestTopList from "@/components/Investment/InvestTopList";
 import InvestMiddleList from "@/components/Investment/InvestMiddleList";
 
 export default {
-  name: "MyInvestment",
+  name: "renewalDetailed",
   components: {
     CommonHeader,
     InvestTopList,
@@ -34,13 +34,19 @@ export default {
   },
   methods: {
     getMsg() {
-      let ID = this.$route.params.id;
+      let ID = this.$route.query.id;
       this.$api.invest.investDetial(ID).then(res => {
         let data = res.data;
         console.log(data);
         if (data.code) {
           this.data = data.data;
         }
+      });
+    },
+    invest() {
+      this.$router.push({
+        path: "/renewal",
+        query: { id: this.$route.query.id }
       });
     }
   }
