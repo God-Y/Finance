@@ -23,6 +23,7 @@ import moreDetailed from "./views/Financing/MoreDetailed.vue"; /* 查看更多�
 import compactOne from "./views/Financing/compacts/CompactOne.vue"; /* 出借咨询与服务协议 */
 import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
 import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
+import gesture from "./views/AccountSetting/gesture.vue"; /* 手势密码 */
 
 Vue.use(Router);
 
@@ -168,6 +169,9 @@ export default new Router({
       path: "/compactOne",
       // name: "compactOne",
       component: compactOne,
+      meta: {
+        keepAlive: false // 不需要被缓存
+      },
       children: [
         {
           path: "signatrue",
@@ -177,7 +181,10 @@ export default new Router({
         {
           path: "",
           name: "compactContent",
-          component: compactContent
+          component: compactContent,
+          meta: {
+            keepAlive: false // 不需要被缓存
+          }
         } /* 合同内容 */
       ]
     },
@@ -185,6 +192,21 @@ export default new Router({
       path: "/renewal",
       name: "renewal",
       component: () => import("./views/Financing/renewal/ProductRenewal.vue")
-    } /* 产品续投 */
+    } /* 产品续投 */,
+    {
+      path: "/renewalDetailed",
+      name: "renewalDetailed",
+      component: () => import("./views/Financing/renewal/RenawalDetailed.vue")
+    } /* 产品续投 */,
+    {
+      path: "/gesture",
+      name: "gesture",
+      component: gesture
+    }, //手势密码
+    {
+      path: "/uploadImg",
+      name: "uploadImg",
+      component: () => import("./views/AccountSetting/Verified/UploadImg.vue")
+    }
   ]
 });
