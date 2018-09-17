@@ -59,7 +59,6 @@ export default new Vuex.Store({
     loginout(state) {
       //登出的时候， 重置这些值
       state.isLogin = false;
-
     },
     changeFinancing(state, value) {
       console.log(value);
@@ -68,7 +67,6 @@ export default new Vuex.Store({
       state.user = "";
       state.realName = false;
       sessionStorage.clear();
-
     }
   },
   actions: {}

@@ -181,7 +181,8 @@ export default new Router({
       path: "/financingList",
       component: financingList,
       meta: {
-        keepAlive: false // 不需要被缓存
+        keepAlive: false, // 不需要被缓存
+        requireAuth: true
       },
       children: [
         {
@@ -198,10 +199,7 @@ export default new Router({
             keepAlive: false // 不需要被缓存
           }
         } /* 增加list */
-      ],
-      meta: {
-        requireAuth: true
-      }
+      ]
     },
     {
       path: "/productCount",
