@@ -85,10 +85,10 @@ export default {
       return this.$store.state.city;
     },
     userName() {
-      return this.$store.state.user.idName || '';
+      return this.$store.state.user.idName || "";
     },
     userId() {
-      return this.$store.state.user.idNumber || '';
+      return this.$store.state.user.idNumber || "";
     }
   },
   methods: {

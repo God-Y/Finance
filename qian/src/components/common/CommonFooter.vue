@@ -31,7 +31,7 @@ export default {
     };
   },
   activated() {
-    if(this.$store.state.isLogin){
+    if (this.$store.state.isLogin) {
       this.getNewMsg();
     }
   },
