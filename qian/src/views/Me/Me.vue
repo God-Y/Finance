@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     userMsg() {
-      let user = this.$store.state.user;
+      let user = this.$store.state.user || JSON.parse(sessionStorage.user);
       return user;
     }
   }

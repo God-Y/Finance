@@ -50,14 +50,17 @@ export default {
         if (data.code == 1) {
           //正确登录跳转精品推荐
           this.getUser();
+          this.$store.commit("login");
         }
       });
     },
     //获取数据，往仓库中更新数据
     getUser() {
       this.$api.me.getMsg().then(res => {
+        console.log(document.cookie);
         let data = res.data;
         if (data.code) {
+          //这里写入对象
           this.$store.commit("getUser", data.data);
           this.$router.push("/me");
         }

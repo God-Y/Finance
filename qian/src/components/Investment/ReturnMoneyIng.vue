@@ -31,7 +31,7 @@
               </div>
               <div class="list-footer van-hairline--top">
                 <span>
-                  {{item.valueDateStart|time}}起息-{{item.valueDateEnd|time}}到息
+                  {{item.valueDateStart|time}}起息 - {{item.valueDateEnd|time}}到息
                 </span>
                   <span class="iconfont icon-jiantouyou"></span>
               </div>

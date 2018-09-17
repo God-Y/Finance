@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+// import Home from "./views/Home.vue";
 import StartPage from "./views/user/Start.vue"; //引导页
 import Login from "./views/user/Login.vue"; //登陆页
 import FindPassword from "./views/user/FindPassword.vue"; //登陆页
@@ -25,8 +25,12 @@ import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
 import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
 import SearchCity from "./views/SearchCity/SearchCity.vue"; /* 合同内容 */
 import Payment from "./views/Paymment/Patment.vue"; /* 合同内容 */
+import PayResult from "./views/Paymment/PayResult.vue"; /* 合同内容 */
 
 import gesture from "./views/AccountSetting/gesture.vue"; /* 手势密码 */
+import Help from "./views/set/help.vue"; /* 手势密码 */
+import AboutUs from "./views/set/aboutUs.vue"; /* 手势密码 */
+import Option from "./views/set/option.vue"; /* 手势密码 */
 
 Vue.use(Router);
 
@@ -37,13 +41,13 @@ export default new Router({
     return { x: 0, y: 0 };
   },
   routes: [
+    // {
+    //   path: "/",
+    //   name: "home",
+    //   component: Home
+    // },
     {
-      path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/start", //启动页
+      path: "/", //启动页
       name: "start",
       component: StartPage
     },
@@ -108,7 +112,7 @@ export default new Router({
       component: () => import("./views/BankCard/BankCardManage.vue")
     },
     {
-      path: "/add-backCard", //银行卡
+      path: "/add-backCard", //银行卡添加
       name: "add-backCard",
       component: () => import("./views/BankCard/AddBankCard.vue")
     },
@@ -131,6 +135,11 @@ export default new Router({
       path: "/payment/:id", //支付模块
       name: "payment",
       component: Payment
+    },
+    {
+      path: "/pay-result/:msg", //支付结果 msg：0失败 1成功
+      name: "PayResult",
+      component: PayResult
     },
     /* 推荐 */
     {
@@ -223,6 +232,21 @@ export default new Router({
       path: "/gesture",
       name: "gesture",
       component: gesture
+    }, //手势密码
+    {
+      path: "/help",
+      name: "help",
+      component: Help
+    }, //帮助中心
+    {
+      path: "/aboutUs",
+      name: "aboutUs",
+      component: AboutUs
+    }, //关于我们
+    {
+      path: "/option",
+      name: "option",
+      component: Option
     }, //手势密码
     {
       path: "/uploadImg",

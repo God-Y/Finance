@@ -35,6 +35,11 @@ body {
 .van-toast__text {
   white-space: nowrap;
 }
+/* 设置弹窗的最小宽度 */
+.van-toast--default{
+  min-width: 3.2rem!important;
+  width: initial!important;
+}
 /* 产品详情弹窗样式 */
 .van-button--large {
   height: 44px !important;
