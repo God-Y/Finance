@@ -11,7 +11,8 @@ export default new Vuex.Store({
     realName: false, //是否实名
     city: "", //选择城市
     user: null, //保存整个用户的信息
-    submitPaydata: null //提交支付有关的数据
+    submitPaydata: null, //提交支付有关的数据
+    financing: ""
   },
   getters: {
     real(state) {
@@ -57,9 +58,16 @@ export default new Vuex.Store({
     loginout(state) {
       //登出的时候， 重置这些值
       state.isLogin = false;
+
+    },
+    changeFinancing(state, value) {
+      console.log(value);
+      state.financing = value;
+
       state.user = "";
       state.realName = false;
       sessionStorage.clear();
+
     }
   },
   actions: {}

@@ -32,7 +32,7 @@
       </div>
       <div>暂无可续投产品，赶紧投资吧！</div>
       <div>
-        <van-button class="button-style" type="warning">立即投资</van-button>
+        <van-button @click="jumpList" class="button-style" type="warning">立即投资</van-button>
       </div>
     </div>
   </div>
@@ -97,6 +97,12 @@ export default {
       this.$router.push({
         path: "/renewalDetailed",
         query: { id: id }
+      });
+    }, //跳转至续投详情
+    jumpList() {
+      this.$store.commit("changeFinancing", 0);
+      this.$router.push({
+        path: "/financingList"
       });
     }
   }

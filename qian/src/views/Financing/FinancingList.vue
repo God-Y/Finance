@@ -23,15 +23,23 @@ export default {
     footerCommon
   },
   data() {
-    return {
-      active: ""
-    };
+    return {};
   },
-  created() {},
-  computed: {},
   mounted() {},
+  created() {},
+  activated() {},
+  computed: {
+    active: {
+      get: function() {
+        console.log("移动角标？", this.$store.state.financing);
+        return this.$store.state.financing;
+      },
+      set: () => {}
+    } //vuex 从addlist中修改这个值
+  },
   methods: {
     change(index) {
+      this.$store.commit("changeFinancing", "");
       switch (index) {
         case 0:
           this.$router.push({
