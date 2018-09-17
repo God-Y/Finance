@@ -18,7 +18,7 @@ export default {
   deleteImgMsg(id) {
     //用户删除平台消息
     return axios({
-      url: "/api/u/message/" + id,
+      url: "/api/u/messagePlatform/" + id,
       method: "delete"
     });
   },
@@ -29,11 +29,14 @@ export default {
       method: "get"
     });
   },
-  userMsg(id) {
+  userMsg(id, status) {
     //查看用户消息
     return axios({
-      url: "/api/u/messageUser/" + id,
-      method: "put"
+      url: "/api/u/message/" + id,
+      method: "put",
+      data: {
+        look: status
+      }
     });
   },
   deleteUserMsg(id) {

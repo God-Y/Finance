@@ -13,7 +13,7 @@
     </div>
     <div class="profit">
       <span>累计收益（元）</span>
-      <span>{{profit}}</span>
+      <span>{{user.profit|amount}}</span>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="me">
-    <me-header :user="userMsg" :profit ="profit"></me-header>
+    <me-header :user="userMsg" ></me-header>
     <me-list></me-list>
     <common-footer></common-footer>
   </div>
@@ -18,29 +18,19 @@ export default {
     CommonFooter
   },
   data() {
-    return {
-      userMsg: null,
-      profit: null
-    };
+    return {};
   },
-  created() {
-    this.getMsg();
-  },
-  methods: {
-    getMsg() {
-      this.$api.me.getMsg().then(res => {
-        let data = res.data;
-        if (data.code) {
-          this.userMsg = data.data;
-          //获取profit这个属性
-          let profit = ~~data.data.profit;
-          this.profit = profit.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
-        }
-      });
+  computed: {
+    userMsg() {
+      let user = this.$store.state.user;
+      return user;
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+.me {
+  padding-bottom: 60px;
+}
 //启动页
 </style>

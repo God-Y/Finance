@@ -32,6 +32,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .MyInvestment {
+  padding-bottom: 60px;
   .header {
     line-height: 48px;
     text-align: center;

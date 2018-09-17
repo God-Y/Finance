@@ -31,8 +31,10 @@ body {
 .van-toast {
   top: 80% ;
 }
-
-
+/* 弹窗不换行 */
+.van-toast__text {
+  white-space: nowrap;
+}
 /* 产品详情弹窗样式 */
 .van-button--large {
   height: 44px !important;
