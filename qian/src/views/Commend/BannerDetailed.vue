@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <CommonHeader title="缺少一个标题"></CommonHeader>
+      <CommonHeader :title=title></CommonHeader>
     </div>
     <img class="banner-style" :src=banner>
   </div>
@@ -16,21 +16,28 @@ export default {
   },
   data() {
     return {
-      banner: ""
+      // banner: ""
     };
   },
   created() {
-    this.getBanner();
+    // this.getBanner();
   },
-  computed: {},
+  computed: {
+    banner() {
+      return this.$route.query.cover;
+    },
+    title() {
+      return this.$route.query.title;
+    }
+  },
   mounted() {},
   methods: {
-    getBanner() {
-      let id = this.$route.query.id;
-      this.$api.commend.getBanner(id).then(res => {
-        this.banner = res.data.data.content;
-      });
-    }
+    // getBanner() {
+    //   let id = this.$route.query.id;
+    //   this.$api.commend.getBanner(id).then(res => {
+    //     this.banner = res.data.data.content;
+    //   });
+    // }
   }
 };
 </script>
