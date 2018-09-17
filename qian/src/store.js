@@ -11,7 +11,8 @@ export default new Vuex.Store({
     realName: "", //是否实名
     city: "", //选择城市
     user: null, //保存整个用户的信息
-    submitPaydata: null //提交支付有关的数据
+    submitPaydata: null, //提交支付有关的数据
+    financing: ""
   },
   mutations: {
     changeNetwork(state, canUse) {
@@ -37,6 +38,10 @@ export default new Vuex.Store({
     },
     loginout(state) {
       state.isLogin = false;
+    },
+    changeFinancing(state, value) {
+      console.log(value);
+      state.financing = value;
     }
   },
   actions: {}

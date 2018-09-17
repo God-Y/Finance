@@ -150,14 +150,23 @@ export default new Router({
     {
       path: "/financingList",
       component: financingList,
+      meta: {
+        keepAlive: false // 不需要被缓存
+      },
       children: [
         {
           path: "",
-          component: productList
+          component: productList,
+          meta: {
+            keepAlive: false // 不需要被缓存
+          }
         } /* 产品列表 */,
         {
           path: "addList",
-          component: addList
+          component: addList,
+          meta: {
+            keepAlive: false // 不需要被缓存
+          }
         } /* 增加list */
       ]
     },
