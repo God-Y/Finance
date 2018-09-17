@@ -54,6 +54,7 @@ export default {
     this.amountData.amount = this.$route.query.amount;
     this.amountData.productId = this.$route.query.id;
     this.$api.commend.getIncome(this.amountData).then(res => {
+      console.log(res);
       this.income = res.data.data.expectIncome; /* 获取收益金额 */
       this.incomeList = res.data.data.list;
       console.log(this.income);

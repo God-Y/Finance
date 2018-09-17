@@ -50,7 +50,7 @@
           <img class="info" src="@/assets/img/productDetailed/info.png" alt="">
           <span>产品备注</span>
         </div>
-        <span>{{detailedData.describe}}</span>
+        <span>{{detailedData.remark}}</span>
       </li>
       <li>
         <div>
@@ -73,7 +73,7 @@
     </van-dialog>
     <div class="footer">
         <img @click="jumpCount" class="counter" src="@/assets/img/productDetailed/counter.png" alt="">
-        <van-button class="button" type="warning">立即投资</van-button>
+        <van-button @click="jumpInvest" class="button" type="warning">立即投资</van-button>
     </div>
   </div>
 </template>
@@ -141,7 +141,10 @@ export default {
         path: "/productCount",
         query: { id: id, name: this.detailedData.name }
       });
-    } /* 计算页面 */
+    } /* 计算页面 */ ,
+    jumpInvest() {
+      
+    }
   }
 };
 </script>
