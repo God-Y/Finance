@@ -77,6 +77,29 @@ let filtersObj = {
     if (num) {
       return num.slice(-4);
     }
+  },
+
+  //name
+  name(name) {
+    if (name) {
+      return name.replace(/^(.).*(.)$/, "$1*$2");
+    }
+  },
+
+  //phone
+  changePhone(phone) {
+    if (phone != undefined) {
+      phone = phone.toString();
+      return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
+    }
+  },
+
+  //idnum
+  changeID(id) {
+    if (id) {
+      id = id.toString();
+      return id.replace(/(\d{3})\d{10}(\d{4})/, "$1****$2");
+    }
   }
 };
 
