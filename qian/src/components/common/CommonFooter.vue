@@ -13,7 +13,7 @@
         <span class="iconfont icon-iconfonttouzi"></span>
         <div class="location">投资</div>
       </router-link>
-      <router-link tag="li" to="/me">
+      <router-link tag="li" to="/me" @click="show()">
         <span class="iconfont icon-me">
           <span class="point" v-if="msgNum > 0"></span>
         </span>
@@ -31,9 +31,14 @@ export default {
     };
   },
   activated() {
-    this.getNewMsg();
+    if(this.$store.state.isLogin){
+      this.getNewMsg();
+    }
   },
   methods: {
+    // show() {
+    //   console.log(1);
+    // },
     getNewMsg() {
       this.$api.message.newMsg().then(res => {
         let data = res.data;

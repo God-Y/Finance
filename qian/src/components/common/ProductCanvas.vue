@@ -22,11 +22,11 @@ export default {
   // created() {},
   computed: {},
   mounted() {
-    console.log(this.color);
+    // console.log(this.color);
     this.canvasColor = this.color;
-    console.log(this.products);
+    // console.log(this.products);
     //获取canvas元素
-    console.log(this.id);
+    // console.log(this.id);
     let canvas = document.getElementById(this.id);
     //获取一个CanvasRenderingContext2D对象，所有的绘图都通过这个对象完成
     let ctx = canvas.getContext("2d");

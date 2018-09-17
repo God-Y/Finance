@@ -60,7 +60,7 @@ export default {
         if (data.code == 1) {
           //注册后跳转到实名认证页面
           setTimeout(() => {
-            this.$router.push("/verify");
+            this.$router.push("/commend");
           }, 1000);
         }
       });

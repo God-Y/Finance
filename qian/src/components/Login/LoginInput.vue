@@ -5,7 +5,7 @@
         class="van-hairline--bottom input-container"
         :class="{'input-container-border':phoneShow}"
       >
-        <label for="username" class="label-item">
+        <label for="phone" class="label-item">
           <img src="@/assets/img/user/phone.png">
         </label>
         <input 
@@ -15,8 +15,8 @@
           @focus="focus('phoneShow')"
           @blur="phoneBlur"
           maxlength="11"
-          ref="username"
-          id="username" 
+          ref="phone"
+          id="phone" 
           class="input-item"
           placeholder="请输入11位手机号"
         >
