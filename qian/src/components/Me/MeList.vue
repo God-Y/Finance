@@ -44,7 +44,7 @@ export default {
           path: "/trading-flow/1"
         },
         { id: 3, title: "消 息 中 心", icon: "icon-xiaoxi", path: "/message" },
-        { id: 4, title: "账 户 设 置", icon: "icon-dian", path: "" }
+        { id: 4, title: "账 户 设 置", icon: "icon-dian", path: "/setting" }
       ]
     };
   },

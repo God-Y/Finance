@@ -4,11 +4,13 @@ import me from "./me/me"; //我的页面
 import common from "./common/common"; /* 通用 */
 import invest from "./invest/invest"; /* 投资 */
 import message from "./message/msg"; /* 投资 */
+import setting from "./acountSet/setting"; /* 设置 */
 export default {
   commend,
   user,
   me,
   common,
   invest,
-  message
+  message,
+  setting
 };

@@ -4,5 +4,9 @@ export default {
   //获取轮播图
   sendImage(file) {
     return axios.post(`/api/a/upload-picture`, file);
+  },
+
+  checklogin() {
+    return axios.get(`/api/loginPage`);
   }
 };

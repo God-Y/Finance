@@ -8,22 +8,22 @@
       </div>
       <div class="img-preview">
         <div>
-          <div v-if="!imgOne">
+          <div v-if="font">
             <van-uploader :after-read="readOne" accept="image/gif, image/jpeg" multiple>
             <img class="cover" src="@/assets/img/verify/cover.png" alt="">
             <p>身份证正面</p>
             </van-uploader>
           </div>
-          <img @click="change('one')" class="img-style" :src=imgOne alt="">
+          <img v-else @click="change('one')" class="img-style" :src=user.idFront alt="">
         </div>
         <div>
-          <div v-if="!imgTwo">
+          <div v-if="back">
             <van-uploader :after-read="readTwo" accept="image/gif, image/jpeg" multiple>
             <img class="cover" src="@/assets/img/verify/cover.png" alt="">
             <p>身份证反面</p>
             </van-uploader>
           </div>
-          <img @click="change" class="img-style" :src=imgTwo alt="">
+          <img v-else @click="change" class="img-style" :src=user.idBack alt="">
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 </template>
  
 <script>
+import { Toast } from "vant";
 import { Dialog } from "vant";
 import commenHeader from "common/CommonHeader.vue";
 export default {
@@ -44,29 +45,47 @@ export default {
   },
   data() {
     return {
-      imgOne: "",
-      imgTwo: "",
-      disabled: true
+      user: {},
+      disabled: true,
+      font: true,
+      back: true
     };
+  },
+  activated() {
+    this.getUser();
   },
   created() {},
   computed: {},
   mounted() {},
   methods: {
+    getUser() {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      console.log(this.user);
+    }, //获取身份信息
     readOne(file) {
-      this.imgOne = file.content;
+      let form = new FormData();
+      form.append("file", file.file);
+      this.$api.common.sendImage(form).then(res => {
+        console.log(res.data);
+        this.user.idFront = res.data;
+        this.font = false;
+        console.log(this.user.idFront);
+      });
       this.validator();
-      console.log(file);
     } /* 正面 */,
     readTwo(file) {
-      this.imgTwo = file.content;
+      let form = new FormData();
+      form.append("file", file.file);
+      this.$api.common.sendImage(form).then(res => {
+        console.log(res);
+        this.user.idBack = res.data;
+        this.back = false;
+      });
       this.validator();
-      console.log(file);
     }, //反面
     validator() {
       this.disabled = true;
-      if (!!this.imgOne && !!this.imgTwo) {
-        console.log(!!this.imgOne && !!this.imgTwo);
+      if (this.user.idFront != null && !!this.user.idBack != null) {
         this.disabled = false;
       }
     },
@@ -77,20 +96,27 @@ export default {
       })
         .then(() => {
           if (val == "one") {
-            this.imgOne = !this.imgOne;
-            this.imgOne = "";
+            this.font = true;
+            this.user.idFront = null;
             this.validator();
           } else {
-            this.imgTwo = !this.imgTwo;
-            this.imgTwo = "";
+            this.back = true;
+            this.user.idBack = null;
             this.validator();
           }
         })
         .catch(() => {});
     } /* 更改是否删除图片 */,
     submit() {
-      this.$api.common.sendImage().then(res => {
+      console.log(this.user);
+      this.$api.setting.verify(this.user).then(res => {
         console.log(res);
+        if (res.data.code == 1) {
+          Toast.success("请求成功");
+          this.$router.push({
+            path: "/verify"
+          });
+        }
       });
     }
   }
