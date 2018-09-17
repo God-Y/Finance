@@ -79,6 +79,7 @@
 </template>
  
 <script>
+import { Toast } from "vant";
 export default {
   name: "productDetailed",
   data() {
@@ -141,9 +142,19 @@ export default {
         path: "/productCount",
         query: { id: id, name: this.detailedData.name }
       });
-    } /* 计算页面 */ ,
+    } /* 计算页面 */,
     jumpInvest() {
-      
+      let id = this.$route.query.id; /* 产品id */
+      if (this.$store.state.realName == "") {
+        Toast.fail("请先实名认证！");
+        this.$router.push({
+          path: "/writeIdInfo"
+        }); //跳转至实名认证
+      } else {
+        this.$router.push({
+          path: `/payment/${id}`
+        }); //实名后跳转至支付页面
+      }
     }
   }
 };
