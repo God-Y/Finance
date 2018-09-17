@@ -28,6 +28,12 @@ export default {
       submitUse: true //提交按钮
     };
   },
+  activated() {
+    this.findData.phone = "";
+    this.findData.password = "";
+    this.findData.rePassword = "";
+    this.findData.code = "";
+  },
   watch: {
     //未输入完全置灰按钮
     findData: {
@@ -55,7 +61,7 @@ export default {
           //正确登录跳转精品推荐
           setTimeout(() => {
             this.$router.push("/login");
-          }, 2000);
+          }, 1000);
         }
       });
     }

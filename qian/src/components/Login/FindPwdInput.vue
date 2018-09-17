@@ -194,7 +194,6 @@ export default {
       let second = 60;
       let that = this;
       let timer = setInterval(() => {
-        console.log(second);
         that.getCodeTitle = second + "s";
         second--;
         if (second == 0) {

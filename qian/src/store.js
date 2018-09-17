@@ -52,6 +52,7 @@ export default new Vuex.Store({
       state.realName = value.idAuthentication == 20;
     },
     login(state) {
+      sessionStorage.setItem("isLogin", true);
       state.isLogin = true;
     },
     loginout(state) {

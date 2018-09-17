@@ -33,19 +33,19 @@
             <span class="limit">{{item.dailyLimit/10000}}万</span>
           </div>
         </div>
-    </div>
-    <div class="footer-box">
-      <div class="top-title">如需更换银行卡信息请拨打客服电话</div>
-      <div class="bottom-title">
-        <span class="iconfont icon-lianxikefu"></span>客服电话 
-        <a href="tel:400-800-0100" class="tel"> <span>400-800-0100</span></a>
-      </div>
-      <van-button 
-        class="button-style"
-        type="warning"
-        :disabled="ableUse"
-        @click=" goAdd"
-      >添加银行卡</van-button>
+        <div class="footer-box">
+          <div class="top-title">如需更换银行卡信息请拨打客服电话</div>
+          <div class="bottom-title">
+            <span class="iconfont icon-lianxikefu"></span>客服电话 
+            <a href="tel:400-800-0100" class="tel"> <span>400-800-0100</span></a>
+          </div>
+          <van-button 
+            class="button-style"
+            type="warning"
+            :disabled="ableUse"
+            @click=" goAdd"
+          >添加银行卡</van-button>
+        </div>
     </div>
   </div>
 </template>
@@ -72,7 +72,7 @@ export default {
       return this.data.length == 2;
     },
     name() {
-      return this.$store.state.realName;
+      return this.$store.getters.real;
     }
   },
   activated() {

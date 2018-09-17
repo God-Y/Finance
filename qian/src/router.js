@@ -22,14 +22,14 @@ import moreDetailed from "./views/Financing/MoreDetailed.vue"; /* 查看更多�
 import compactOne from "./views/Financing/compacts/CompactOne.vue"; /* 出借咨询与服务协议 */
 import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
 import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
-import SearchCity from "./views/SearchCity/SearchCity.vue"; /* 合同内容 */
-import Payment from "./views/Paymment/Patment.vue"; /* 合同内容 */
-import PayResult from "./views/Paymment/PayResult.vue"; /* 合同内容 */
+import SearchCity from "./views/SearchCity/SearchCity.vue"; /* 搜索城市 */
+import Payment from "./views/Paymment/Patment.vue"; /* 立即投资 */
+import PayResult from "./views/Paymment/PayResult.vue"; /*投资结果*/
 
 import gesture from "./views/AccountSetting/gesture.vue"; /* 手势密码 */
-import Help from "./views/set/help.vue"; /* 手势密码 */
-import AboutUs from "./views/set/aboutUs.vue"; /* 手势密码 */
-import Option from "./views/set/option.vue"; /* 手势密码 */
+import Help from "./views/set/help.vue"; /* 帮助中心 */
+import AboutUs from "./views/set/aboutUs.vue"; /* 关于我们 */
+import Option from "./views/set/option.vue"; /* 意见反馈 */
 
 Vue.use(Router);
 

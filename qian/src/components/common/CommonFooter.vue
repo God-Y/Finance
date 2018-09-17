@@ -36,9 +36,6 @@ export default {
     }
   },
   methods: {
-    // show() {
-    //   console.log(1);
-    // },
     getNewMsg() {
       this.$api.message.newMsg().then(res => {
         let data = res.data;
