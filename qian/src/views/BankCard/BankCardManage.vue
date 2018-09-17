@@ -102,7 +102,8 @@ export default {
     },
     goAdd() {
       //未实名,跳转到实名认证
-      if (!name) {
+      // alert(name);
+      if (!this.name) {
         this.$toast.fail("未进行实名认证");
         setTimeout(() => {
           this.$router.push("/writeIdInfo");

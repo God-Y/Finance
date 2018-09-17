@@ -37,7 +37,7 @@ for (let key in vfilters) {
 }
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
-    let isLogin = store.state.isLogin || localStorage.getItem("isLogin");
+    let isLogin = store.getters.isLogin;
     if (isLogin && getCookie("cookie")) {
       //如果登陆状态存在，直接跳转到下一页
       next();
