@@ -15,7 +15,7 @@ export default {
   common,
   invest,
   message,
-  setting
+  setting,
   bank,
   payment,
   set

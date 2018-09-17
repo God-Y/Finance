@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-// import Home from "./views/Home.vue";
 import StartPage from "./views/user/Start.vue"; //引导页
 import Login from "./views/user/Login.vue"; //登陆页
 import FindPassword from "./views/user/FindPassword.vue"; //登陆页
@@ -41,11 +40,6 @@ export default new Router({
     return { x: 0, y: 0 };
   },
   routes: [
-    // {
-    //   path: "/",
-    //   name: "home",
-    //   component: Home
-    // },
     {
       path: "/", //启动页
       name: "start",
@@ -284,7 +278,7 @@ export default new Router({
       path: "/verify",
       name: "verify",
       component: () => import("./views/AccountSetting/Verified/Verified.vue")
-    }, //身份审核
+    }, //实名认证
     {
       path: "/changePwd",
       name: "changePwd",
