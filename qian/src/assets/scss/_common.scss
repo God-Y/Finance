@@ -66,3 +66,13 @@
     text-align: center !important;
   }
 }
+
+.input-style {
+  .van-icon {
+    margin-right: 15px;
+  }
+  .van-field__control {
+    padding-left: 15px;
+    border-left: 1px solid #e8e8e8 !important;
+  }
+}

@@ -26,7 +26,7 @@
         </carousel-3d>
       </div>
       <div class="button-box">
-        <van-button class="button-style" type="warning">立即投资</van-button>
+        <van-button @click="invest" class="button-style" type="warning">立即投资</van-button>
       </div>
     </main>
     <footer>
@@ -61,11 +61,13 @@ export default {
         pagination: {
           el: ".swiper-pagination",
           clickable: true
-        } /* 分页 */
+        } /* 分页 */,
+        id: ""
       }
     };
   },
   created() {
+    this.checkLogin();
     this.getImg();
     this.getProduct();
   },
@@ -80,8 +82,9 @@ export default {
       });
     },
     changeSlide(index) {
-      console.log(index);
+      console.log(this.products[index]);
       this.productName = this.products[index].name;
+      this.id = this.products[index].id;
       console.log(this.productName);
     } /* 3d滑动的callback，获取index值 */,
     getImg() {
@@ -92,10 +95,16 @@ export default {
     getProduct() {
       this.$api.commend.productCommend().then(res => {
         this.products = res.data.data;
-        console.log(this.products);
+        console.log(this.products[0]);
         this.productName = this.products[0].name;
       });
-    } /* 获取推荐产品 */
+    } /* 获取推荐产品 */,
+    checkLogin() {
+      this.$api.common.checklogin().then(res => {
+        console.log(res);
+      });
+    },
+    invest() {}
   }
 };
 </script>
@@ -105,6 +114,7 @@ export default {
   background: #fff;
   @extend %flex-center-vartical;
   line-height: 50px;
+  border-bottom: 1px solid #e8e8e8;
   & > span {
     color: #e8c763;
     font-size: 19px;
@@ -120,6 +130,7 @@ export default {
   display: flex;
   margin-bottom: 10px;
   max-height: 150px;
+  background: #fff;
   .img-style {
     max-width: 100%;
   }
@@ -164,6 +175,7 @@ export default {
   } /* 徽章 */
 }
 main {
+  height: 64vh;
   background: #fff;
 }
 .product-box {

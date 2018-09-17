@@ -228,6 +228,43 @@ export default new Router({
       path: "/uploadImg",
       name: "uploadImg",
       component: () => import("./views/AccountSetting/Verified/UploadImg.vue")
+    }, //身份证照片上传
+    {
+      path: "/writeIdInfo",
+      name: "writeIdInfo",
+      component: () => import("./views/AccountSetting/Verified/writeIdInfo.vue")
+    }, //填写信息
+    {
+      path: "/setting",
+      // name: "setting",
+      component: () => import("./views/AccountSetting/AccountSetting.vue"),
+      children: [
+        {
+          path: "",
+          name: "setlist",
+          component: () => import("./components/Setting/Setlist.vue")
+        }, //填写信息
+        {
+          path: "/setting/changeAddress",
+          name: "changeAdderss",
+          component: () => import("./components/Setting/ChangeAddress.vue")
+        }, //地址修改
+        {
+          path: "/setting/changeEmail",
+          name: "changeEmail",
+          component: () => import("./components/Setting/ChangeEmail.vue")
+        } //邮箱修改
+      ]
+    },
+    {
+      path: "/verify",
+      name: "verify",
+      component: () => import("./views/AccountSetting/Verified/Verified.vue")
+    }, //身份审核
+    {
+      path: "/changePwd",
+      name: "changePwd",
+      component: () => import("./views/AccountSetting/ChangePassword.vue")
     }
   ]
 });
