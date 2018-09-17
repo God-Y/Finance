@@ -58,10 +58,10 @@ export default {
         let data = res.data;
         this.$toast(data.message);
         if (data.code == 1) {
-          //正确登录跳转精品推荐
+          //注册后跳转到实名认证页面
           setTimeout(() => {
-            this.$router.push("/login");
-          }, 2000);
+            this.$router.push("/commend");
+          }, 1000);
         }
       });
     }

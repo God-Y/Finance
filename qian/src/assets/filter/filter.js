@@ -27,7 +27,7 @@ let filtersObj = {
     )}:${twoValue(seconds)}`;
   },
   amount: function(val) {
-    if (val !== undefined) {
+    if (val !== undefined && val !== null) {
       return Number(val)
         .toFixed(2)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1,");

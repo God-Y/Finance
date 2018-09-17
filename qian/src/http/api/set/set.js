@@ -17,5 +17,9 @@ export default {
     return axios.post("/api/u/proposal", {
       proposal: data
     });
+  },
+  //退出登陆
+  loginout() {
+    return axios.get("/api/u/esc");
   }
 };

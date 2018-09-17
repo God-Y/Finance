@@ -2,10 +2,14 @@
   <div>
     <div class="me-header" v-if="user">
       <div class="photo-box">
-        <div class="photo"></div>
+        <div class="photo">
+          <img :src="user.logo" alt="" srcset="">
+        </div>
         <span class="user-name" >{{user.idName||user.phone}}</span>
       </div> 
-      <img src="@/assets/img/user/setUp.png" class="set-up" alt="">
+      <img src="@/assets/img/user/setUp.png" class="set-up" 
+        @click="$router.push('/set')"
+      >
       <div class="money">
         <div>总资产（元）</div>
         <div class="assets" >{{user.assets|amount}}</div>
@@ -13,7 +17,7 @@
     </div>
     <div class="profit">
       <span>累计收益（元）</span>
-      <span>{{user.profit|amount}}</span>
+      <span v-if="user">{{user.profit}}</span>
     </div>
   </div>
 </template>
@@ -21,7 +25,7 @@
 <script>
 export default {
   name: "MeHeader",
-  props: ["user", "profit"]
+  props: ["user"]
 };
 </script>
 <style lang="scss" scoped>
@@ -48,8 +52,11 @@ export default {
       width: 42px;
       height: 42px;
       margin-right: 8px;
-      background: red;
       border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
     }
   }
   .money {

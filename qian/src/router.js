@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-// import Home from "./views/Home.vue";
 import StartPage from "./views/user/Start.vue"; //引导页
 import Login from "./views/user/Login.vue"; //登陆页
 import FindPassword from "./views/user/FindPassword.vue"; //登陆页
@@ -41,11 +40,6 @@ export default new Router({
     return { x: 0, y: 0 };
   },
   routes: [
-    // {
-    //   path: "/",
-    //   name: "home",
-    //   component: Home
-    // },
     {
       path: "/", //启动页
       name: "start",
@@ -57,7 +51,7 @@ export default new Router({
       component: Login
     },
     {
-      path: "/commend",
+      path: "/commend", //推荐页
       name: "commend",
       component: Commend
     },
@@ -84,62 +78,98 @@ export default new Router({
     {
       path: "/me", //我的页面
       name: "me",
-      component: MePage
+      component: MePage,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/trading-flow/:pages", //交易流水
       name: "trading-flow",
-      component: TradingFlow
+      component: TradingFlow,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/trading-detial/:id", //交易流水详情
       name: "tradingDetial",
-      component: TradingDetial
+      component: TradingDetial,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/my-investment", //我的投资页面
       name: "myInvestment",
-      component: () => import("./views/Investment/MyInvestment.vue")
+      component: () => import("./views/Investment/MyInvestment.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/investment-detial/:id", //投资详情
       name: "investment-detial",
-      component: () => import("./views/Investment/InvestDetial.vue")
+      component: () => import("./views/Investment/InvestDetial.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/backCard-manage", //银行卡
       name: "backCard-manage",
-      component: () => import("./views/BankCard/BankCardManage.vue")
+      component: () => import("./views/BankCard/BankCardManage.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/add-backCard", //银行卡添加
       name: "add-backCard",
-      component: () => import("./views/BankCard/AddBankCard.vue")
+      component: () => import("./views/BankCard/AddBankCard.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/search-city", //搜索城市
       name: "search-sity",
-      component: SearchCity
+      component: SearchCity,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/message", //信息管理
       name: "message",
-      component: () => import("./views/Msg/msg.vue")
+      component: () => import("./views/Msg/msg.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/check-msg/:id", //查看更多的信息
       name: "check-msg",
-      component: () => import("./views/Msg/CheckPlat.vue")
+      component: () => import("./views/Msg/CheckPlat.vue"),
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/payment/:id", //支付模块
       name: "payment",
-      component: Payment
+      component: Payment,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/pay-result/:msg", //支付结果 msg：0失败 1成功
       name: "PayResult",
-      component: PayResult
+      component: PayResult,
+      meta: {
+        requireAuth: true
+      }
     },
     /* 推荐 */
     {
@@ -168,13 +198,17 @@ export default new Router({
             keepAlive: false // 不需要被缓存
           }
         } /* 增加list */
-      ]
+      ],
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/productCount",
       component: productCount,
       meta: {
-        keepAlive: false // 不需要被缓存
+        keepAlive: false, // 不需要被缓存
+        requireAuth: true
       },
       children: [
         {
@@ -197,20 +231,27 @@ export default new Router({
     {
       path: "/productDetailed",
       name: "productDetailed",
-      component: productDetailed
+      component: productDetailed,
+      meta: {
+        requireAuth: true
+      }
     } /* 产品详情 */,
     {
       path: "/moreDetailed",
       name: "moreDetailed",
-      component: moreDetailed
+      component: moreDetailed,
+      meta: {
+        requireAuth: true
+      }
     } /* 查看更多详情 */,
     {
       path: "/compactOne",
-      // name: "compactOne",
       component: compactOne,
       meta: {
-        keepAlive: false // 不需要被缓存
+        keepAlive: false, // 不需要被缓存
+        requireAuth: true
       },
+
       children: [
         {
           path: "signatrue",
@@ -230,12 +271,26 @@ export default new Router({
     {
       path: "/renewal",
       name: "renewal",
-      component: () => import("./views/Financing/renewal/ProductRenewal.vue")
+      component: () => import("./views/Financing/renewal/ProductRenewal.vue"),
+      meta: {
+        requireAuth: true
+      }
     } /* 产品续投 */,
     {
       path: "/renewalDetailed",
       name: "renewalDetailed",
-      component: () => import("./views/Financing/renewal/RenawalDetailed.vue")
+      component: () => import("./views/Financing/renewal/RenawalDetailed.vue"),
+      meta: {
+        requireAuth: true
+      }
+    } /* 产品续投 */,
+    {
+      path: "/set",
+      name: "moreSet",
+      component: () => import("./views/set/set.vue"),
+      meta: {
+        requireAuth: true
+      }
     } /* 产品续投 */,
     {
       path: "/gesture",
@@ -245,31 +300,46 @@ export default new Router({
     {
       path: "/help",
       name: "help",
-      component: Help
+      component: Help,
+      meta: {
+        requireAuth: true
+      }
     }, //帮助中心
     {
       path: "/aboutUs",
       name: "aboutUs",
-      component: AboutUs
+      component: AboutUs,
+      meta: {
+        requireAuth: true
+      }
     }, //关于我们
     {
       path: "/option",
       name: "option",
-      component: Option
+      component: Option,
+      meta: {
+        requireAuth: true
+      }
     }, //手势密码
     {
       path: "/uploadImg",
       name: "uploadImg",
-      component: () => import("./views/AccountSetting/Verified/UploadImg.vue")
+      component: () => import("./views/AccountSetting/Verified/UploadImg.vue"),
+      meta: {
+        requireAuth: true
+      }
     }, //身份证照片上传
     {
       path: "/writeIdInfo",
       name: "writeIdInfo",
-      component: () => import("./views/AccountSetting/Verified/writeIdInfo.vue")
+      component: () =>
+        import("./views/AccountSetting/Verified/writeIdInfo.vue"),
+      meta: {
+        requireAuth: true
+      }
     }, //填写信息
     {
       path: "/setting",
-      // name: "setting",
       component: () => import("./views/AccountSetting/AccountSetting.vue"),
       children: [
         {
@@ -292,12 +362,18 @@ export default new Router({
     {
       path: "/verify",
       name: "verify",
-      component: () => import("./views/AccountSetting/Verified/Verified.vue")
-    }, //身份审核
+      component: () => import("./views/AccountSetting/Verified/Verified.vue"),
+      meta: {
+        requireAuth: true
+      }
+    }, //实名认证
     {
       path: "/changePwd",
       name: "changePwd",
-      component: () => import("./views/AccountSetting/ChangePassword.vue")
+      component: () => import("./views/AccountSetting/ChangePassword.vue"),
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 });

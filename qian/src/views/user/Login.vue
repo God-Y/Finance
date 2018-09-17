@@ -44,7 +44,6 @@ export default {
   methods: {
     login() {
       this.$api.user.login(this.user).then(res => {
-        console.log(res);
         let data = res.data;
         this.$toast(data.message);
         if (data.code == 1) {
@@ -57,12 +56,11 @@ export default {
     //获取数据，往仓库中更新数据
     getUser() {
       this.$api.me.getMsg().then(res => {
-        console.log(document.cookie);
         let data = res.data;
         if (data.code) {
           //这里写入对象
           this.$store.commit("getUser", data.data);
-          this.$router.push("/me");
+          this.$router.push("/commend");
         }
       });
     }
