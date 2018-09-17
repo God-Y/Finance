@@ -123,6 +123,7 @@ export default {
       this.$api.commend.getIncome(this.amountData).then(res => {
         if (this.detailedData.repaymentMode == 10) {
           //本息一次收
+          console.log(res);
           this.incomeShow = true;
           this.income = res.data.data.expectIncome; /* 获取收益金额 */
         } else {

@@ -2,11 +2,11 @@
   <div>
     <header class="header-style">
       <span>精品推荐</span>
-      <img class="bell" src="../../assets/img/CommendImg/bell.png">
+      <img @click="jumpMessage" class="bell" src="../../assets/img/CommendImg/bell.png">
     </header>
     <div class="carousel-box">
        <swiper v-if="carousel.length>0" :options="swiperOption">
-          <swiper-slide v-for="item of carousel" :key="item.index"><img @click="bannerDetalied(item.id)" class="img-style" :src="item.cover" ></swiper-slide>
+          <swiper-slide v-for="item of carousel" :key="item.index"><img @click="bannerDetalied(item.id, item.cover, item.title)" class="img-style" :src="item.cover" ></swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
@@ -74,13 +74,13 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-    bannerDetalied(banner) {
+    bannerDetalied(banner, cover, title) {
       console.log(banner);
       this.$router.push({
         path: "/bannerDetailed",
-        query: { id: banner }
+        query: { id: banner, cover: cover, title: title }
       });
-    },
+    }, //点击banner 获取详情
     changeSlide(index) {
       console.log(this.products[index]);
       this.productName = this.products[index].name;
@@ -89,6 +89,7 @@ export default {
     } /* 3d滑动的callback，获取index值 */,
     getImg() {
       this.$api.commend.GetCommendImg().then(res => {
+        console.log(res);
         this.carousel = res.data.data;
       });
     } /* 获取轮播图 */,
@@ -103,8 +104,19 @@ export default {
       this.$api.common.checklogin().then(res => {
         console.log(res);
       });
-    },
-    invest() {}
+    }, ///判断是否登录，但是这个接口暂时用不上
+    jumpMessage() {
+      this.$router.push({
+        path: "/message"
+      });
+    }, //跳转至消息中心
+    invest() {
+      console.log(this.id);
+      this.$router.push({
+        path: "/productDetailed",
+        query: { id: this.id }
+      });
+    } //跳转至产品详情页
   }
 };
 </script>

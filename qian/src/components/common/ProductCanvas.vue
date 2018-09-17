@@ -97,7 +97,7 @@ export default {
       ctx.textAlign = "center";
       ctx.fillStyle = this.canvasColor; //设置或返回用于填充绘画的颜色、渐变或模式。
       // ctx.fillText(nowRange.toFixed(2) + "%", r, r + size / 2); //居中
-      ctx.fillText(nowRange.toFixed(2) + "%", r, 95);
+      ctx.fillText((nowRange * 100).toFixed(2) + "%", r, 95);
 
       ctx.fillStyle = "#999"; //设置或返回用于填充绘画的颜色、渐变或模式。
       ctx.font = 12 + "px Helvetica Neue"; //font	设置或返回文本内容的当前字体属性。
@@ -116,7 +116,7 @@ export default {
       );
       ctx.fillText("|", 105, 145);
       ctx.fillText("期限", 140, 125);
-      ctx.fillText(this.products.annualizedIncome + "个月", 140, 145);
+      ctx.fillText(this.products.deadline + "个月", 140, 145);
       ctx.restore();
     };
 
