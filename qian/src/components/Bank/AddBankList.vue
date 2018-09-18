@@ -55,7 +55,6 @@
           >
         </li>
       </ul>
-
     </div>
     <common-dialog v-if="showDialog" @hide="hide" @getbank="getbank"></common-dialog>
   </div>
@@ -85,10 +84,10 @@ export default {
       return this.$store.state.city;
     },
     userName() {
-      return this.$store.state.user.idName || "";
+      return this.$store.getters.userMsg.idName;
     },
     userId() {
-      return this.$store.state.user.idNumber || "";
+      return this.$store.getters.userMsg.idNumber;
     }
   },
   methods: {

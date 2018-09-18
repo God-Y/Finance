@@ -1,7 +1,7 @@
 <template>
   <div class="CheckMsgImg">
     <common-header :title="data.title"></common-header>
-    <!-- <div>1111111111</div> -->
+    <div><img :src="data.content"></div>
   </div>
 </template>
  
@@ -18,7 +18,7 @@ export default {
       data: null
     };
   },
-  created() {
+  activated() {
     this.getMsg();
   },
   methods: {
@@ -26,7 +26,6 @@ export default {
       let ID = this.$route.params.id;
       this.$api.message.getImgMsg(ID).then(res => {
         let data = res.data;
-        console.log(data);
         if (data.code) {
           this.data = data.data;
         }
@@ -37,6 +36,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .CheckMsgImg {
-  background: red;
+  // background: red;
+  img {
+    width: 100%;
+  }
 }
 </style>

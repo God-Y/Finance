@@ -11,7 +11,7 @@
       >添加银行卡</van-button>
     </div>
     <div v-else class="card-list">
-        <div class="card" v-for="item of data" :key='item.id'>
+        <div class="card" v-for="item of data" :key='item.id' @click="defaultCard(item.id)">
           <div class="logo-box">
             <img :src="item.bankLogo" alt="" class="bank-logo">
           </div>
@@ -45,6 +45,12 @@
             :disabled="ableUse"
             @click=" goAdd"
           >添加银行卡</van-button>
+          <van-button 
+            class="go-commend"
+            type="warning"
+            :disabled="!goUse"
+            @click="$router.push('/financingList')"
+          >去投资</van-button>
         </div>
     </div>
   </div>
@@ -64,7 +70,8 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      defaultClick: false
     };
   },
   computed: {
@@ -73,10 +80,29 @@ export default {
     },
     name() {
       return this.$store.getters.real;
+    },
+    //去推荐页
+    goUse() {
+      return this.data.length > 0;
     }
   },
   activated() {
     this.getMsg();
+    this.getUser();
+  },
+  beforeRouteEnter(to, from, next) {
+    //如果是从设置默认银行卡，就可以设置点击事件
+    if (from.name === "setlist") {
+      next(vm => {
+        vm.defaultClick = true;
+      });
+      return;
+    }
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    this.defaultClick = false;
+    next();
   },
   methods: {
     getMsg() {
@@ -84,7 +110,7 @@ export default {
         let data = res.data;
         console.log(data);
         if (data.code) {
-          this.data = data.data.slice(-1);
+          this.data = data.data;
         }
       });
     },
@@ -102,7 +128,6 @@ export default {
     },
     goAdd() {
       //未实名,跳转到实名认证
-      // alert(name);
       if (!this.name) {
         this.$toast.fail("未进行实名认证");
         setTimeout(() => {
@@ -112,6 +137,31 @@ export default {
       }
       this.$store.commit("changeCity", "");
       this.$router.push("/add-backCard");
+    },
+    getUser() {
+      this.$api.me.getMsg().then(res => {
+        let data = res.data;
+        if (data.code) {
+          //这里写入对象
+          this.$store.commit("getUser", data.data);
+        }
+      });
+    },
+    defaultCard(id) {
+      console.log(22222222222222);
+      console.log(id);
+      if (this.defaultClick) {
+        this.$api.setting.defaultCard(id).then(res => {
+          let data = res.data;
+          if (data.code == 1) {
+            this.$toast.success(data.message);
+            setTimeout(() => {
+              this.$router.go(-1);
+            }, 1000);
+          }
+        });
+      }
+      return;
     }
   }
 };
@@ -193,7 +243,7 @@ export default {
     box-sizing: border-box;
     left: 15px;
     right: 15px;
-    bottom: 25px;
+    bottom: 10px;
     text-align: center;
     color: #999;
     .top-title {
@@ -214,6 +264,10 @@ export default {
     }
     .button-style {
       width: 100%;
+    }
+    .go-commend {
+      width: 100%;
+      margin-top: 10px;
     }
   }
 }

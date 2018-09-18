@@ -21,5 +21,11 @@ export default {
 
   changePassword(data) {
     return axios.put(`/api/u/password`, data);
+  },
+  // 默认银行卡
+  defaultCard(cardId) {
+    return axios.put(`/api/u/reBank`, {
+      id: cardId
+    });
   }
 };
