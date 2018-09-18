@@ -123,7 +123,8 @@ export default {
       this.$api.commend.getProductDetailed(id).then(res => {
         console.log(res);
         this.detailedData = res.data.data[1];
-        this.novicePlan = res.data.data[0].verificationStatus.isHavingNovicePlan;
+        this.novicePlan =
+          res.data.data[0].verificationStatus.isHavingNovicePlan;
         console.log(this.novicePlan);
         console.log(this.detailedData);
       });

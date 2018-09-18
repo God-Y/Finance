@@ -6,9 +6,6 @@
     </header>
     <invest-top-list :data="data"></invest-top-list>
     <Invest-middle-list :list='data'></Invest-middle-list>
-    <div class="button-box">
-      <van-button class="button-style" type="warning">立即投资</van-button>
-    </div>
   </div>
 </template>
  

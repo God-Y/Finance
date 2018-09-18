@@ -24,7 +24,8 @@ import signatrue from "./views/Financing/compacts/signatrue.vue"; /* 签名 */
 import compactContent from "./views/Financing/compacts/CompactContent.vue"; /* 合同内容 */
 import SearchCity from "./views/SearchCity/SearchCity.vue"; /* 搜索城市 */
 import Payment from "./views/Paymment/Patment.vue"; /* 立即投资 */
-import PayResult from "./views/Paymment/PayResult.vue"; /*投资结果*/
+import PayFail from "./views/Paymment/PayResult.vue"; /*投资结果*/
+import PaySuccess from "./views/Paymment/PaySuccess.vue"; /*投资成功*/
 
 import gesture from "./views/AccountSetting/gesture.vue"; /* 手势密码 */
 import Help from "./views/set/help.vue"; /* 帮助中心 */
@@ -172,9 +173,17 @@ export default new Router({
       }
     },
     {
-      path: "/pay-result/:msg", //支付结果 msg：0失败 1成功
-      name: "PayResult",
-      component: PayResult,
+      path: "/pay-fail", //支付失败
+      name: "PayFail",
+      component: PayFail,
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
+      path: "/pay-success", //支付成功
+      name: "PaySuccess",
+      component: PaySuccess,
       meta: {
         requireAuth: true
       }

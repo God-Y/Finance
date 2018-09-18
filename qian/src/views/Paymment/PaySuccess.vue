@@ -3,16 +3,23 @@
     <common-header title="支付结果" class="header"></common-header>
     <div class="result-box">
       <img 
-        src="@/assets/img/pay/fail.png" 
+        src="@/assets/img/pay/success.png" 
         class="result-img" >
-        <div class="result-text">支付失败</div>
+      <div class="result-text">支付成功</div>
     </div>
     <footer class="footer">
       <van-button 
         class="button-style" 
         type="warning"
         @click="submitPay"
-      >重新投资</van-button>
+      >查看订单</van-button>
+      <van-button 
+        v-if="!resultImg"
+        class="button-bottom" 
+        type="warning"
+         plain
+         @click="$router.push('/financingList')"
+      >返回列表</van-button>
     </footer>
   </div>
 </template>
@@ -32,7 +39,10 @@ export default {
   computed: {},
   activated() {},
   methods: {
-    submitPay() {}
+    submitPay() {
+      //成功后跳转到理财列表
+      this.$router.push("/my-investment");
+    }
   }
 };
 </script>
@@ -50,7 +60,7 @@ export default {
   }
   .result-text {
     font-size: 15px;
-    color: red;
+    color: #5bbc11;
   }
   .footer {
     position: fixed;
