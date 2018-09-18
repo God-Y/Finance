@@ -3,7 +3,7 @@
     <common-header title="投资金额"></common-header>
     <pay-production :data = "data"></pay-production>
     <pay-bank-card :data = "selectList"></pay-bank-card>
-    <pay-input @submitMoney = "submitMoney"></pay-input>
+    <pay-input @submitMoney = "submitMoney" ref='payInput'></pay-input>
     <van-checkbox v-model="checked" class="allow">
       本人已认真阅读并同意
       <span 
@@ -114,7 +114,11 @@ export default {
       this.submitData.amount = value;
     },
     submitPay() {
-      //startingAmount
+      //startingAmount起头金额
+      if (this.data.startingAmount > this.submitData.amount) {
+        this.$toast.fail("投资金额不得小于起头金额");
+        return;
+      }
       if (
         this.submitData.amount < 10000 ||
         !Number.isInteger(~~this.submitData.amount)

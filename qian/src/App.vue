@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div class="no-net" v-if="!netWork">
+    <!-- <div class="no-net" v-if="!netWork">
       <span class="iconfont icon-WIFIxinhao-ji"></span>
       <span class="net-title">加载失败或网络错误</span>
       <van-button type="primary" class="submit-btn" @click="$router.go(0)">重新加载</van-button>
-    </div>
-    <keep-alive v-else>
+    </div> -->
+    <keep-alive>
       <router-view />
     </keep-alive>
   </div>

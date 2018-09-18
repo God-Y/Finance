@@ -4,10 +4,11 @@
    <msg-list>
      <ul>
        <template v-for="item in List">
+         <!-- 用户消息 -->
         <li 
           v-if="item.code" 
           :key="item.gmtCreate" 
-          @tap="tapUser(item.id)" 
+          @tap="tapUser(item.id,item.code)" 
           @touchstart="timeStart(item.id,0)" 
           @touchend="timeEnd()"
           :class="[item.look ==10 ?'isLook':'']"
@@ -17,7 +18,7 @@
             <span class="date">{{item.gmtCreate|time}}</span>
           </div>
           <div class="item-bottom">
-            <span>{{item.name+getStatus(item.code)}}</span>
+            <span>{{getStatusMSg(item)}}</span>
             <span class="iconfont icon-jiantouyou"></span>
           </div>
         </li>
@@ -89,6 +90,24 @@ export default {
           return "回款成功 ";
         case 60:
           return "回款失败";
+        case 70:
+          return "续投成功";
+        case 80:
+          return "开始续投";
+        case 100:
+          return "实名通过";
+        case 101:
+          return "实名未通过";
+        case 102:
+          return "取消实名";
+      }
+    },
+    getStatusMSg(item) {
+      //平台消息
+      if (item.code < 100) {
+        return item.name + this.getStatus(item.code);
+      } else {
+        return "实名消息：" + this.getStatus(item.code);
       }
     },
     timeStart(id, index) {
@@ -140,14 +159,18 @@ export default {
       this.end = new Date().valueOf();
     },
     //用户消息
-    tapUser(id) {
+    tapUser(id, code) {
       let duration = this.end - this.start;
       //小于400ms触发点击事件
       if (duration < 400) {
         this.$api.message.userMsg(id, 10).then(res => {
           let data = res.data;
           if (data.code) {
-            this.$router.push(`/investment-detial/${id}`);
+            if (code < 100) {
+              this.$router.push(`/investment-detial/${id}`);
+            } else {
+              this.$router.push(`/real-name/${code}`);
+            }
           }
         });
       }

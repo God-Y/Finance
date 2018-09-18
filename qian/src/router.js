@@ -156,6 +156,14 @@ export default new Router({
       }
     },
     {
+      path: "/real-name/:id", //查看更多的信息
+      name: "Real-name",
+      component: () => import("./views/Msg/realName.vue"),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: "/payment/:id", //支付模块
       name: "payment",
       component: Payment,

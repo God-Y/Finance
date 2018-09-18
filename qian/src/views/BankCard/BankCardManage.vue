@@ -11,7 +11,7 @@
       >添加银行卡</van-button>
     </div>
     <div v-else class="card-list">
-        <div class="card" v-for="item of data" :key='item.id' @click="defaultCard(item.id)">
+        <div class="card" v-for="item of data" :key='item.id' @click="defaultCard(item.id)" :style="cardBgColor(item.bankName)">
           <div class="logo-box">
             <img :src="item.bankLogo" alt="" class="bank-logo">
           </div>
@@ -26,11 +26,11 @@
           </div>
           <div class="money-num-1">
             <span>单笔限额</span>
-            <span class="limit">{{item.singleLimit/10000}}万</span>
+            <span class="limit">{{item.singleLimit/10000}} 万</span>
           </div>
           <div class="money-num-2">
-            <span>日&ensp;限&ensp;额</span>
-            <span class="limit">{{item.dailyLimit/10000}}万</span>
+            <span>日&ensp;限&ensp;额&ensp;</span>
+            <span class="limit">{{item.dailyLimit/10000}} 万</span>
           </div>
         </div>
         <div class="footer-box">
@@ -90,20 +90,6 @@ export default {
     this.getMsg();
     this.getUser();
   },
-  beforeRouteEnter(to, from, next) {
-    //如果是从设置默认银行卡，就可以设置点击事件
-    if (from.name === "setlist") {
-      next(vm => {
-        vm.defaultClick = true;
-      });
-      return;
-    }
-    next();
-  },
-  beforeRouteLeave(to, from, next) {
-    this.defaultClick = false;
-    next();
-  },
   methods: {
     getMsg() {
       this.$api.bank.manageBankCard().then(res => {
@@ -139,6 +125,7 @@ export default {
       this.$router.push("/add-backCard");
     },
     getUser() {
+      //重新请求user的数据
       this.$api.me.getMsg().then(res => {
         let data = res.data;
         if (data.code) {
@@ -147,26 +134,42 @@ export default {
         }
       });
     },
+    //设置默认银行卡
     defaultCard(id) {
-      console.log(22222222222222);
-      console.log(id);
-      if (this.defaultClick) {
-        this.$api.setting.defaultCard(id).then(res => {
-          let data = res.data;
-          if (data.code == 1) {
-            this.$toast.success(data.message);
-            setTimeout(() => {
-              this.$router.go(-1);
-            }, 1000);
-          }
+      this.$dialog
+        .confirm({
+          message: "设置该卡为默认银行卡"
+        })
+        .then(() => {
+          this.$api.setting.defaultCard(id).then(res => {
+            let data = res.data;
+            if (data.code == 1) {
+              this.$toast.success(data.message);
+              setTimeout(() => {
+                this.$router.push("/setting");
+              }, 1000);
+            }
+          });
+        })
+        .catch(() => {
+          this.$toast("取消操作");
         });
+    },
+    cardBgColor(name) {
+      switch (name) {
+        case "工商银行":
+          return { backgroundColor: "#C40006" };
+        case "农业银行":
+          return { backgroundColor: "#319C8B" };
+        default:
+          return { backgroundColor: "#3e64ad" };
       }
-      return;
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+// C40006
 .bankcard-manage {
   .no-bankCard {
     margin-top: 127px;
@@ -190,8 +193,7 @@ export default {
       position: relative;
       margin-top: 15px;
       height: 130px;
-      padding: 18px 10px 16px 48px;
-      background: #3e64ad;
+      padding: 18px 10px 0px 48px;
       border-radius: 6px;
     }
     //银行卡盒子

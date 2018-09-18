@@ -50,7 +50,7 @@ export default {
       this.textStyle = {
         color: "#ed4630"
       };
-      this.btnMsg = "重新支付";
+      this.btnMsg = "重新购买";
     } else {
       this.resultText = "支付成功";
       this.textStyle = {
@@ -76,7 +76,16 @@ export default {
     // }
   },
   activated() {},
-  methods: {}
+  methods: {
+    submitPay() {
+      if (this.resultImg) {
+        //投资失败重新投资
+        console.log(1);
+      } else {
+        this.$router.push("/my-investment");
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

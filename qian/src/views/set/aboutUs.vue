@@ -4,7 +4,7 @@
     <div class="wrapper" ref="wrapper">
         <ul class="content">
           <li v-for="item in data" :key="item.id">
-            <img :src="item.content" alt="">
+            <img :src="item.content">
           </li>
         </ul>
     </div >
@@ -28,13 +28,17 @@ export default {
   created() {
     this.getMsg();
   },
-  mounted() {
+  activated() {
     if (!this.scrool) {
-      this.scrool = new Bscroll(this.$refs.wrapper, {});
+      this.scrool = new Bscroll(this.$refs.wrapper, {
+        observeDOM: true
+      });
     } else {
       this.scrool.refresh();
+      this.scrool.scrollTo(0, 0);
     }
   },
+
   methods: {
     getMsg() {
       this.$api.set.aboutUs().then(res => {

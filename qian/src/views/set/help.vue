@@ -27,11 +27,14 @@ export default {
   created() {
     this.getMsg();
   },
-  mounted() {
+  activated() {
     if (!this.scrool) {
-      this.scrool = new Bscroll(this.$refs.wrapper, {});
+      this.scrool = new Bscroll(this.$refs.wrapper, {
+        observeDOM: true
+      });
     } else {
       this.scrool.refresh();
+      this.scrool.scrollTo(0, 0);
     }
   },
   methods: {
