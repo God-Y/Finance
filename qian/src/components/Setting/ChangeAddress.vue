@@ -5,7 +5,7 @@
       <span  class="wordCount">{{count}}/50</span>
     </div>
     <div class="button-box">
-      <van-button @click="submit" class="button-style" type="warning">提交</van-button>
+      <van-button :disabled=showButton @click="submit" class="button-style" type="warning">提交</van-button>
     </div>
   </div>
 </template>
@@ -24,7 +24,15 @@ export default {
     };
   },
   created() {},
-  computed: {},
+  computed: {
+    showButton() {
+      if (this.count > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    } //按钮显示
+  },
   mounted() {},
   methods: {
     addressInput() {
