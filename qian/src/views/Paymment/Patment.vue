@@ -114,6 +114,7 @@ export default {
       this.submitData.amount = value;
     },
     submitPay() {
+      //startingAmount
       if (
         this.submitData.amount < 10000 ||
         !Number.isInteger(~~this.submitData.amount)

@@ -1,16 +1,20 @@
 <template>
   <div class="help">
     <common-header title="关于我们" class="header"></common-header>
-    <div>
-      <img :src="data.content" alt="" class="img-box">
-    </div>
+    <div class="wrapper" ref="wrapper">
+        <ul class="content">
+          <li v-for="item in data" :key="item.id">
+            <img :src="item.content" alt="">
+          </li>
+        </ul>
+    </div >
      
   </div>
 </template>
  
 <script>
 import CommonHeader from "common/CommonHeader";
-
+import Bscroll from "better-scroll";
 export default {
   name: "AboutUs",
   components: {
@@ -23,6 +27,13 @@ export default {
   },
   created() {
     this.getMsg();
+  },
+  mounted() {
+    if (!this.scrool) {
+      this.scrool = new Bscroll(this.$refs.wrapper, {});
+    } else {
+      this.scrool.refresh();
+    }
   },
   methods: {
     getMsg() {
@@ -40,9 +51,13 @@ export default {
 .header {
   position: fixed;
   width: 100%;
+  top: 0;
 }
-.img-box {
+.wrapper {
   margin-top: 50px;
-  width: 100%;
+  height: 80vh;
+  img {
+    width: 100%;
+  }
 }
 </style>

@@ -20,7 +20,7 @@ export default {
     return {
       swiperTitle: [
         { name: "理财中", id: 0 },
-        { name: "投资中", id: 1 },
+        { name: "回款中", id: 1 },
         { name: "已回款", id: 2 }
       ]
     };

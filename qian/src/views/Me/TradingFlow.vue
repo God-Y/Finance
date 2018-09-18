@@ -6,7 +6,7 @@
       :data='List' 
       :dirty="dirty"
       @pullingUp="pullingUp"
-      v-if="List"
+      v-if="noFlow"
     >
        <ul class="list-content">
           <li v-for="item in List" 
@@ -27,7 +27,7 @@
     </CommonScrool>
     <div class="noContent-list" v-else>
       <img src="@/assets/img/user/noContent.png" class="noContent" alt="">
-      <p>暂无交易内容</p>
+      <p>暂无交易流水</p>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      List: null,
+      List: [],
       dirty: true,
       pageTotal: 0,
       pageNum: 1
@@ -54,6 +54,11 @@ export default {
   },
   activated() {
     this.loadData();
+  },
+  computed: {
+    noFlow() {
+      return this.List.length > 0;
+    }
   },
   methods: {
     //获取数据
