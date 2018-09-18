@@ -66,7 +66,7 @@ export default {
       let form = new FormData();
       form.append("file", file.file);
       this.$api.common.sendImage(form).then(res => {
-        console.log(res.data);
+        console.log(res);
         this.user.idFront = res.data;
         this.font = false;
         console.log(this.user.idFront);

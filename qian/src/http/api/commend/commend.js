@@ -55,5 +55,9 @@ export default {
     return axios.post(`/api/u/renewal-investment-user`, {
       params: data
     });
-  }
+  }, //产品续投接口
+
+  userInvestment(data) {
+    return axios.post(`/api/u/user-investment`, data);
+  } //用户投资接口
 };
