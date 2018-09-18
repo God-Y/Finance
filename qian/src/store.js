@@ -16,6 +16,7 @@ export default new Vuex.Store({
   },
   getters: {
     real(state) {
+      console.log(7788, state.realName);
       if (state.realName) {
         return state.realName;
       } else {
@@ -58,6 +59,7 @@ export default new Vuex.Store({
       sessionStorage.setItem("user", user);
       state.user = value;
       state.realName = value.idAuthentication === 20;
+      console.log(4896, state.realName);
     },
     login(state) {
       sessionStorage.setItem("isLogin", true);

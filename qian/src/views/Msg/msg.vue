@@ -68,6 +68,7 @@ export default {
   methods: {
     getMsg() {
       this.$api.message.getMsg().then(res => {
+        console.log(res);
         let data = res.data;
         if (data.code) {
           this.List = data.data;

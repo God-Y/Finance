@@ -9,7 +9,7 @@
       <p class="p-style">审核时间在两小时之内，请耐心等待</p>
       <p class="p-style">工作时间为9:00-18:00</p>
       <div class="button-box">
-        <van-button @click="addBankCard" class="button-style" type="warning">添加银行卡</van-button>
+        <van-button disabled @click="addBankCard" class="button-style" type="warning">添加银行卡</van-button>
         <van-button @click="back" class="button-style" type="primary" plain>返回</van-button>
       </div>
     </div>

@@ -67,7 +67,7 @@ export default {
     };
   },
   created() {
-    this.checkLogin();
+    // this.checkLogin();
     this.getImg();
     this.getProduct();
   },
@@ -98,6 +98,7 @@ export default {
         this.products = res.data.data;
         console.log(this.products[0]);
         this.productName = this.products[0].name;
+        this.id = this.products[0].id;
       });
     } /* 获取推荐产品 */,
     checkLogin() {
