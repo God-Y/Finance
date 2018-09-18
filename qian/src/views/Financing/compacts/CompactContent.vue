@@ -130,6 +130,12 @@ export default {
         console.log(data);
         this.$api.commend.userInvestment(data).then(res => {
           console.log(res);
+          if (res.status === 200) {
+            const div = document.createElement("div");
+            div.innerHTML = res.data;
+            document.body.appendChild(div);
+            document.forms.forwardForm.submit();
+          }
         }); //用户投资
       } else {
         this.sendData.id = this.$route.query.id;
