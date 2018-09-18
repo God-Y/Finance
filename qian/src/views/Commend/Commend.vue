@@ -51,12 +51,15 @@ export default {
       productName: "",
       color: "#CCA64E" /* 传递给canvas？ */,
       swiperOption: {
+        observer: true,
+        observeParents: true,
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
         speed: 300,
         autoplay: {
-          delay: 5000
+          delay: 5000,
+          disableOnInteraction: false
         },
         pagination: {
           el: ".swiper-pagination",

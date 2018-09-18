@@ -116,7 +116,11 @@ export default {
       );
       ctx.fillText("|", 105, 145);
       ctx.fillText("期限", 140, 125);
-      ctx.fillText(this.products.deadline + "个月", 140, 145);
+      if (this.products.deadline === 7) {
+        ctx.fillText(this.products.deadline + "日", 140, 145);
+      } else {
+        ctx.fillText(this.products.deadline + "个月", 140, 145);
+      } //渲染 日、月判断
       ctx.restore();
     };
 

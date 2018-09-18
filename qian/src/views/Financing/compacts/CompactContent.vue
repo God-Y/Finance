@@ -2,7 +2,7 @@
   <div>
     <div class="compact-content">
       <h4>出借咨询与服务协议</h4>
-      <p>本协议由以下双方于______年______月______日在中华人民共和国北京市朝阳区签署 </p>
+      <p>本协议由以下双方于{{userInfo.gmtCreate | chineseTime}}在中华人民共和国北京市朝阳区签署 </p>
       <p>甲方（出借人）： <span v-if="userInfo.idName">{{userInfo.idName}}</span></p>
       <p>证件类型：<span>{{userInfo.type}}</span></p> 
       <p>证件号：<span>{{userInfo.idNumber}}</span></p>
@@ -31,11 +31,13 @@
         </div>
         <div class="sign-box">
           <span>乙方(电子签章)：</span>
-          <img :src=userInfo.companySeal alt="">
+          <div class="sign">
+            <img class="sign-style" :src=userInfo.companySeal alt="">
+          </div>
         </div>
       </div>
       <div>
-        <van-button v-if="status" @click="submit" class="button" type="warning">提交</van-button>
+        <van-button :disabled=buttonShow v-if="status" @click="submit" class="button" type="warning">提交</van-button>
       </div>
     </div>
   </div>
@@ -48,7 +50,7 @@ export default {
   data() {
     return {
       userInfo: {
-        contactSign: "1 "
+        contactSign: "1 " //甲方签名
       } /* 请求接收到的信息，渲染至合同中 */,
       sendData: {},
       status: false, //提交按钮
@@ -68,10 +70,11 @@ export default {
       this.checkSubmit = true;
     } //判断是否购买产品页进入
     this.getInfo(); /* 获取合同信息 */
-    this.getSign(); /* 获取签名url */
+    // this.getSign(); /* 获取签名url */
   },
   activated() {
     console.log("actevated");
+    this.getInfo(); /* 返回上一页时 再获取合同信息 */
     // this.status = false;
     // // console.log(this.$route.query.status);
     // if (this.$route.query.status) {
@@ -80,12 +83,28 @@ export default {
     // this.getInfo(); /* 获取合同信息 */
     // this.getSign(); /* 获取签名url */
   },
+  beforeRouteLeave(to, from, next) {
+    console.log("离开");
+    sessionStorage.removeItem("url");
+    next();
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+  },
   computed: {
     signBg() {
       if (this.userInfo.contactSign) {
         return { background: "#fff" };
       } else {
         return { background: "#f7f7f7" };
+      }
+    },
+    buttonShow() {
+      let url = JSON.parse(sessionStorage.getItem("url"));
+      console.log(url);
+      if (!url) {
+        return true;
+      } else {
+        return false;
       }
     }
   } /* 计算属性改变签名box 背景 */,
@@ -98,7 +117,7 @@ export default {
   //     return;
   //   }
   //   next();
-  // }, //通过路由钩子判断是否为购买产品
+  // }, //通过路由钩子判断是否为购买产品 ， 弃用，因为签名页返回来后不能保存，使用query传值
   mounted() {},
   methods: {
     getInfo() {
@@ -111,6 +130,13 @@ export default {
           if (res.data.data != null) {
             this.userInfo = res.data.data;
           }
+        });
+      } else if (this.$route.query.status === "payment") {
+        this.$api.common.getContractUserInfo().then(res => {
+          console.log(res);
+          this.userInfo = res.data.data;
+          console.log(this.userInfo);
+          this.getSign();
         });
       }
     } /* 续投时 ， 获取合同信息 */,

@@ -8,5 +8,10 @@ export default {
 
   checklogin() {
     return axios.get(`/api/loginPage`);
+  },
+
+  //获取签署合同所需要的信息
+  getContractUserInfo() {
+    return axios.get(`/api/u/contract-userInfo`);
   }
 };
