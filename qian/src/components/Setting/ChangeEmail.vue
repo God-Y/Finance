@@ -5,7 +5,7 @@
       <span  class="wordCount">{{count}}/50</span>
     </div>
     <div class="button-box">
-      <van-button @click="submit" class="button-style" type="warning">提交</van-button>
+      <van-button :disabled=showButton @click="submit" class="button-style" type="warning">提交</van-button>
     </div>
   </div>
 </template>
@@ -24,7 +24,15 @@ export default {
     };
   },
   created() {},
-  computed: {},
+  computed: {
+    showButton() {
+      if (this.count > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    } //按钮显示
+  },
   mounted() {},
   methods: {
     emailInput() {
@@ -32,18 +40,23 @@ export default {
     }, //输入字符
     submit() {
       console.log(this.data);
-      this.$api.setting.email(this.data).then(res => {
-        console.log(res);
-        if (res.data.code === 1) {
-          Toast.success("更新成功");
-          this.$router.push({
-            path: "/setting"
-          });
-        } else {
-          Toast.fail("更新失败,请重试");
-          return false;
-        }
-      });
+      let reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+      if (!reg.test(this.data.email)) {
+        Toast.fail("请输入正确邮箱号");
+      } else {
+        this.$api.setting.email(this.data).then(res => {
+          console.log(res);
+          if (res.data.code === 1) {
+            Toast.success("更新成功");
+            this.$router.push({
+              path: "/setting"
+            });
+          } else {
+            Toast.fail("更新失败,请重试");
+            return false;
+          }
+        });
+      }
     }
   }
 };

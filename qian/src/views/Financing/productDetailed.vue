@@ -123,7 +123,8 @@ export default {
       this.$api.commend.getProductDetailed(id).then(res => {
         console.log(res);
         this.detailedData = res.data.data[1];
-        this.novicePlan = res.data.data[0].verificationStatus.isHavingNovicePlan;
+        this.novicePlan =
+          res.data.data[0].verificationStatus.isHavingNovicePlan;
         console.log(this.novicePlan);
         console.log(this.detailedData);
       });
@@ -158,7 +159,7 @@ export default {
         this.$router.push({
           path: "/writeIdInfo"
         }); //未实名跳转至实名认证
-      } else if (this.novicePlan === 1) {
+      } else if (this.novicePlan === 1 && this.detailedData.deadline === 7) {
         Dialog.alert({
           title: "提示！",
           message: "新手产品只能购买一次，请选择其他产品进行购买！"
