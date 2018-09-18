@@ -9,7 +9,8 @@
       <div class="income">{{detailedData.annualizedIncome | income}}<span>%</span></div>
       <div class="line-style">
         <div class="line-feed">
-          <span>理财期限(月)</span>
+          <span v-if="detailedData.deadline === 7">理财期限(日)</span>
+          <span v-else>理财期限(月)</span>
           <span>{{detailedData.deadline | monthChnage}}</span>
         </div>
         <span class="vertical-line"></span>
@@ -80,16 +81,21 @@
  
 <script>
 import { Toast } from "vant";
+import { Dialog } from "vant";
 export default {
   name: "productDetailed",
   data() {
     return {
       detailedData: "",
       dateStart: Date.now(), //当前日期
-      show: false /* 查看合同 */
+      show: false, //* 查看合同 */
+      novicePlan: "" //判断是否有购买新手计划
     };
   },
   created() {
+    this.getDetailed();
+  },
+  activated() {
     this.getDetailed();
   },
   computed: {
@@ -117,6 +123,8 @@ export default {
       this.$api.commend.getProductDetailed(id).then(res => {
         console.log(res);
         this.detailedData = res.data.data[1];
+        this.novicePlan = res.data.data[0].verificationStatus.isHavingNovicePlan;
+        console.log(this.novicePlan);
         console.log(this.detailedData);
       });
     } /* 获取产品详情 */,
@@ -149,7 +157,15 @@ export default {
         Toast.fail("请先实名认证！");
         this.$router.push({
           path: "/writeIdInfo"
-        }); //跳转至实名认证
+        }); //未实名跳转至实名认证
+      } else if (this.novicePlan === 1) {
+        Dialog.alert({
+          title: "提示！",
+          message: "新手产品只能购买一次，请选择其他产品进行购买！"
+        }).then(() => {
+          // on close
+          return false;
+        }); //如果已经购买过新手产品，弹窗返回
       } else {
         this.$router.push({
           path: `/payment/${id}`

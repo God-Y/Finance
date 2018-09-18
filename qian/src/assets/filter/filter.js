@@ -7,6 +7,13 @@ let filtersObj = {
     let day = value.getDate();
     return year + " - " + month + " - " + day;
   },
+  chineseTime: function(date) {
+    let value = new Date(date);
+    let year = value.getFullYear();
+    let month = value.getMonth() + 1; //getMonth是从0开始，所以加+
+    let day = value.getDate();
+    return year + "年" + month + "月" + day + "日";
+  }, //合同时间过滤
   timeSecond: function(date) {
     let value = new Date(date);
     let year = value.getFullYear();
