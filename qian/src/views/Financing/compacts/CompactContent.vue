@@ -51,26 +51,34 @@ export default {
         contactSign: "1 "
       } /* 请求接收到的信息，渲染至合同中 */,
       sendData: {},
-      status: false
+      status: false, //提交按钮
+      checkSubmit: false //判断
     };
   },
   created() {
-    // this.status = false;
-    // console.log(this.$route.query.status);
-    // if (this.$route.query.status) {
-    //   this.status = true;
-    // }
-    // this.getInfo(); /* 获取合同信息 */
-    // this.getSign(); /* 获取签名url */
-  },
-  activated() {
+    let statu = this.$route.query.status;
+    console.log(statu);
+    console.log("created");
     this.status = false;
-    console.log(this.$route.query.status);
+    // console.log(this.$route.query.status);
     if (this.$route.query.status) {
       this.status = true;
-    }
+    } //如果是续投页面跳转进来的，按钮为true
+    if (statu === "payment") {
+      this.checkSubmit = true;
+    } //判断是否购买产品页进入
     this.getInfo(); /* 获取合同信息 */
     this.getSign(); /* 获取签名url */
+  },
+  activated() {
+    console.log("actevated");
+    // this.status = false;
+    // // console.log(this.$route.query.status);
+    // if (this.$route.query.status) {
+    //   this.status = true;
+    // } //如果是续投页面跳转进来的，按钮为true
+    // this.getInfo(); /* 获取合同信息 */
+    // this.getSign(); /* 获取签名url */
   },
   computed: {
     signBg() {
@@ -81,6 +89,16 @@ export default {
       }
     }
   } /* 计算属性改变签名box 背景 */,
+  // beforeRouteEnter(to, from, next) {
+  //   if (from.name === "payment") {
+  //     next(vm => {
+  //       vm.checkSubmit = true;
+  //       vm.status = true;
+  //     });
+  //     return;
+  //   }
+  //   next();
+  // }, //通过路由钩子判断是否为购买产品
   mounted() {},
   methods: {
     getInfo() {
@@ -95,7 +113,7 @@ export default {
           }
         });
       }
-    } /* 获取合同信息 */,
+    } /* 续投时 ， 获取合同信息 */,
     jumpSignatrue() {
       this.$router.push({
         path: "/compactOne/signatrue"
@@ -106,15 +124,24 @@ export default {
       console.log(this.userInfo.contactSign);
     } /* 获取签名 url */,
     submit() {
-      this.sendData.id = this.$route.query.id;
-      this.sendData.contactSign = this.userInfo.contactSign;
-      this.$api.commend.renewalInvestment(this.sendData).then(res => {
-        console.log(res.data);
-        if (res.data.code != 1) {
-          Toast.fail(res.data.message);
-        }
-      });
-    } /* 产品续投 */
+      if (this.checkSubmit) {
+        let data = JSON.parse(localStorage.getItem("payment"));
+        data.contractSign = JSON.parse(sessionStorage.getItem("url"));
+        console.log(data);
+        this.$api.commend.userInvestment(data).then(res => {
+          console.log(res);
+        }); //用户投资
+      } else {
+        this.sendData.id = this.$route.query.id;
+        this.sendData.contactSign = this.userInfo.contactSign;
+        this.$api.commend.renewalInvestment(this.sendData).then(res => {
+          console.log(res.data);
+          if (res.data.code != 1) {
+            Toast.fail(res.data.message);
+          }
+        }); //产品续投
+      }
+    }
   }
 };
 </script>

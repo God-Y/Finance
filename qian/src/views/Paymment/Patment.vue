@@ -116,9 +116,17 @@ export default {
     submitPay() {
       if (
         this.submitData.amount < 10000 ||
-        !Number.isInteger(this.submitData.amount)
+        !Number.isInteger(~~this.submitData.amount)
       ) {
         this.$toast.fail("投资金额格式不正确");
+      } else {
+        this.submitData.productId = this.$route.params.id;
+        localStorage.setItem("payment", JSON.stringify(this.submitData));
+        console.log(this.submitData);
+        this.$router.push({
+          path: "/compactOne",
+          query: { status: "payment" }
+        });
       }
     }
   }

@@ -249,7 +249,6 @@ export default new Router({
         keepAlive: false, // 不需要被缓存
         requireAuth: true
       },
-
       children: [
         {
           path: "signatrue",

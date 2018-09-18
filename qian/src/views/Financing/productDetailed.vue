@@ -145,7 +145,7 @@ export default {
     } /* 计算页面 */,
     jumpInvest() {
       let id = this.$route.query.id; /* 产品id */
-      if (this.$store.state.realName == "") {
+      if (!this.$store.getters.real) {
         Toast.fail("请先实名认证！");
         this.$router.push({
           path: "/writeIdInfo"
