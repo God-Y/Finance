@@ -12,5 +12,9 @@ export default {
   //银行卡管理
   manageBankCard() {
     return axios.get(`/api/u/bank`);
+  },
+  //默认银行卡管理
+  defaultBankCard(id) {
+    return axios.get(`/api/u/bank/${id}`);
   }
 };

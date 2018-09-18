@@ -71,11 +71,16 @@ export default {
       return (
         this.checked && this.submitData.userBankId && this.submitData.amount
       );
+    },
+    defaultBankId() {
+      return this.$store.getters.userMsg.bankId;
     }
   },
   activated() {
     this.getMsg(this.ID);
     this.getBankCards();
+    this.getDefault();
+    console.log(this.$store.getters.userMsg);
   },
   methods: {
     getMsg(ID) {
@@ -127,12 +132,23 @@ export default {
       } else {
         this.submitData.productId = this.$route.params.id;
         localStorage.setItem("payment", JSON.stringify(this.submitData));
-        console.log(this.submitData);
+        localStorage.setItem("defaultProductionID", this.ID); //投资失败可以跳转回来
         this.$router.push({
           path: "/compactOne",
           query: { status: "payment" }
         });
       }
+    },
+    getDefault() {
+      if (this.defaultBankId !== 0) {
+        this.$api.bank.defaultBankCard(this.defaultBankId).then(res => {
+          let data = res.data;
+          if (data.code == 1) {
+            this.selectList = data.data;
+          }
+        });
+      }
+      return;
     }
   }
 };

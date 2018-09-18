@@ -32,7 +32,10 @@ export default {
   computed: {},
   activated() {},
   methods: {
-    submitPay() {}
+    submitPay() {
+      let productionID = localStorage.getItem("defaultProductionID");
+      this.$router.push(`/payment/${productionID}`);
+    }
   }
 };
 </script>
