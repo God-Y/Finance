@@ -140,6 +140,12 @@ export default {
           console.log(this.userInfo);
           this.getSign();
         });
+      } else {
+        this.userInfo = {
+          contractSign: "1" //甲方签名
+        };
+        console.log("取消？");
+        return false;
       }
     } /* 续投时 ， 获取合同信息 */,
     jumpSignatrue() {

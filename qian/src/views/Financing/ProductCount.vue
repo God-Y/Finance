@@ -20,6 +20,9 @@ export default {
   created() {
     this.name = this.$route.query.name;
   },
+  activated() {
+    this.name = this.$route.query.name;
+  },
   computed: {},
   mounted() {},
   methods: {}
