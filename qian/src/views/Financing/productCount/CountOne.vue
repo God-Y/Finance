@@ -76,10 +76,15 @@ export default {
     };
   },
   activated() {
+    console.log("acticated");
     this.getDetailed();
     this.init();
   },
-  created() {},
+  created() {
+    console.log("created");
+    this.getDetailed();
+    this.init();
+  },
   computed: {
     countDateStart() {
       let valueDate = this.detailedData.valueDate;
