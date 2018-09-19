@@ -22,6 +22,7 @@
 </template>
  
 <script>
+import { Toast } from "vant";
 import commenHeader from "common/CommonHeader.vue";
 export default {
   name: "writeIdInfo",
@@ -43,13 +44,23 @@ export default {
       }
     } /* 监听button显示否 */
   },
+  beforeRouteLeave(to, from, next) {
+    this.user = {};
+    next();
+  }, //退出组件清空输入框
   mounted() {},
   methods: {
     nextStep() {
-      localStorage.setItem("user", JSON.stringify(this.user));
-      this.$router.push({
-        path: "/uploadImg"
-      });
+      let idPattern = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if (!idPattern.test(this.user.idNumber)) {
+        Toast.fail("请输入正确的身份证号！");
+        return false;
+      } else {
+        localStorage.setItem("user", JSON.stringify(this.user));
+        this.$router.push({
+          path: "/uploadImg"
+        });
+      }
     }
   }
 };

@@ -119,7 +119,8 @@ export default {
       if (this.products.deadline === 7) {
         ctx.fillText(this.products.deadline + "日", 140, 145);
       } else {
-        ctx.fillText(this.products.deadline + "个月", 140, 145);
+        let deadline = this.products.deadline / 30;
+        ctx.fillText(deadline + "个月", 140, 145);
       } //渲染 日、月判断
       ctx.restore();
     };

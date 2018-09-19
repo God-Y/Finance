@@ -11,6 +11,7 @@
 </template>
  
 <script>
+import { Dialog } from "vant";
 import { Toast } from "vant";
 export default {
   name: "changeAddress",
@@ -23,7 +24,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.getInfo();
+  },
   computed: {
     showButton() {
       if (this.count > 0) {
@@ -35,23 +38,39 @@ export default {
   },
   mounted() {},
   methods: {
+    getInfo() {
+      this.$api.setting.getSetting().then(res => {
+        this.data.address = res.data.data.address;
+      });
+    }, //
     addressInput() {
       this.count = this.data.address.length;
     }, //输入字符
     submit() {
-      console.log(this.data);
-      this.$api.setting.address(this.data).then(res => {
-        console.log(res);
-        if (res.data.code === 1) {
-          Toast.success("更新成功");
-          this.$router.push({
-            path: "/setting"
+      Dialog.confirm({
+        title: "提示",
+        message: "是否修改？"
+      })
+        .then(() => {
+          // on confirm
+          console.log(this.data);
+          this.$api.setting.address(this.data).then(res => {
+            console.log(res);
+            if (res.data.code === 1) {
+              Toast.success("更新成功");
+              this.$router.push({
+                path: "/setting"
+              });
+            } else {
+              Toast.fail("更新失败,请重试");
+              return false;
+            }
           });
-        } else {
-          Toast.fail("更新失败,请重试");
-          return false;
-        }
-      });
+        })
+        .catch(() => {
+          Toast.fail("已取消");
+          // on cancel
+        });
     }
   }
 };
