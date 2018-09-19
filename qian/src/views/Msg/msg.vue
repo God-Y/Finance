@@ -8,7 +8,7 @@
         <li 
           v-if="item.code" 
           :key="item.gmtCreate" 
-          @tap="tapUser(item.id,item.code)" 
+          @tap="tapUser(item)" 
           @touchstart="timeStart(item.id,0)" 
           @touchend="timeEnd()"
           :class="[item.look ==10 ?'isLook':'']"
@@ -69,7 +69,6 @@ export default {
   methods: {
     getMsg() {
       this.$api.message.getMsg().then(res => {
-        console.log(res);
         let data = res.data;
         if (data.code) {
           this.List = data.data;
@@ -159,17 +158,19 @@ export default {
       this.end = new Date().valueOf();
     },
     //用户消息
-    tapUser(id, code) {
+    tapUser(item) {
       let duration = this.end - this.start;
       //小于400ms触发点击事件
       if (duration < 400) {
-        this.$api.message.userMsg(id, 10).then(res => {
+        this.$api.message.userMsg(item.id, 10).then(res => {
           let data = res.data;
           if (data.code) {
-            if (code < 100) {
-              this.$router.push(`/investment-detial/${id}`);
+            if (item.code >= 100) {
+              this.$router.push(`/real-name/${item.code}`);
+            } else if (item.code != 20 && item.code < 100) {
+              this.$router.push(`/investment-detial/${item.investmentUserId}`);
             } else {
-              this.$router.push(`/real-name/${code}`);
+              this.$router.push(`/invest-fail/${item.name}`);
             }
           }
         });

@@ -40,7 +40,7 @@ export default {
     },
     back() {
       this.$router.push({
-        path: "/setting"
+        path: "/me"
       });
     }
   }

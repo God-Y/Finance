@@ -5,7 +5,7 @@
         <span class="iconfont icon-tuijian"></span>
         <div class="location">推荐</div>
       </router-link>
-      <router-link tag="li" to="/financingList">
+      <router-link tag="li" to="/financingList" >
         <span class="iconfont icon-licai"></span>
         <div class="location">理财</div>
       </router-link>
@@ -13,7 +13,7 @@
         <span class="iconfont icon-iconfonttouzi"></span>
         <div class="location">投资</div>
       </router-link>
-      <router-link tag="li" to="/me" @click="show()">
+      <router-link tag="li" to="/me" >
         <span class="iconfont icon-me">
           <span class="point" v-if="msgNum > 0"></span>
         </span>
@@ -33,6 +33,7 @@ export default {
   activated() {
     if (this.$store.getters.isLogin) {
       this.getNewMsg();
+      this.getUser();
     }
   },
   methods: {
@@ -45,6 +46,15 @@ export default {
             type: "updatedMsgNum",
             num: data.data
           });
+        }
+      });
+    },
+    getUser() {
+      this.$api.me.getMsg().then(res => {
+        let data = res.data;
+        if (data.code) {
+          //这里写入对象
+          this.$store.commit("getUser", data.data);
         }
       });
     }

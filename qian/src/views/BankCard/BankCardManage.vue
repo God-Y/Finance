@@ -88,13 +88,11 @@ export default {
   },
   activated() {
     this.getMsg();
-    this.getUser();
   },
   methods: {
     getMsg() {
       this.$api.bank.manageBankCard().then(res => {
         let data = res.data;
-        console.log(data);
         if (data.code) {
           this.data = data.data;
         }
@@ -124,16 +122,7 @@ export default {
       this.$store.commit("changeCity", "");
       this.$router.push("/add-backCard");
     },
-    getUser() {
-      //重新请求user的数据
-      this.$api.me.getMsg().then(res => {
-        let data = res.data;
-        if (data.code) {
-          //这里写入对象
-          this.$store.commit("getUser", data.data);
-        }
-      });
-    },
+
     //设置默认银行卡
     defaultCard(id) {
       this.$dialog

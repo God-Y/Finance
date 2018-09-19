@@ -157,9 +157,17 @@ export default new Router({
       }
     },
     {
-      path: "/real-name/:id", //查看更多的信息
+      path: "/real-name/:msg", //消息中心。所有相关的实名信息
       name: "Real-name",
       component: () => import("./views/Msg/realName.vue"),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
+      path: "/invest-fail/:id", //消息中心。投资失败
+      name: "invest-fail",
+      component: () => import("./views/Msg/investFail.vue"),
       meta: {
         requireAuth: true
       }

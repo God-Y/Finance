@@ -121,7 +121,7 @@ export default {
     submitPay() {
       //startingAmount起头金额
       if (this.data.startingAmount > this.submitData.amount) {
-        this.$toast.fail("投资金额不得小于起头金额");
+        this.$toast.fail("投资金额不得小于起投金额");
         return;
       }
       if (
