@@ -135,7 +135,7 @@ export default {
             if (data.code == 1) {
               this.$toast.success(data.message);
               setTimeout(() => {
-                this.$router.push("/setting");
+                this.$router.push("/me");
               }, 1000);
             }
           });

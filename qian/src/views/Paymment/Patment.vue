@@ -80,7 +80,6 @@ export default {
     this.getMsg(this.ID);
     this.getBankCards();
     this.getDefault();
-    console.log(this.$store.getters.userMsg);
   },
   methods: {
     getMsg(ID) {
@@ -145,6 +144,7 @@ export default {
           let data = res.data;
           if (data.code == 1) {
             this.selectList = data.data;
+            this.submitData.userBankId = data.data.id;
           }
         });
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="CheckMsgImg">
-    <common-header :title="data.title"></common-header>
+    <common-header :title="data.title || '活动消息'"></common-header>
     <div><img :src="data.content"></div>
   </div>
 </template>
