@@ -27,12 +27,14 @@
       <div class="footer-style">
         <div class="sign-box">
           <span>甲方(电子签章)：</span>
-          <div @click="jumpSignatrue" :style="signBg" class="sign"><img class="sign-style" :src=userInfo.contactSign alt=""></div>
+          <div @click="jumpSignatrue" :style="signBg" class="sign">
+            <img class="sign-style" :src='userInfo.contractSign' alt="">
+            </div>
         </div>
         <div class="sign-box">
           <span>乙方(电子签章)：</span>
           <div class="sign">
-            <img class="sign-style" :src=userInfo.companySeal alt="">
+            <img class="sign-style" :src='userInfo.companySeal' alt="">
           </div>
         </div>
       </div>
@@ -50,7 +52,7 @@ export default {
   data() {
     return {
       userInfo: {
-        contactSign: "1 " //甲方签名
+        contractSign: "1 " //甲方签名
       } /* 请求接收到的信息，渲染至合同中 */,
       sendData: {},
       status: false, //提交按钮
@@ -92,7 +94,7 @@ export default {
   },
   computed: {
     signBg() {
-      if (this.userInfo.contactSign) {
+      if (this.userInfo.contractSign) {
         return { background: "#fff" };
       } else {
         return { background: "#f7f7f7" };
@@ -146,8 +148,8 @@ export default {
       });
     } /* 跳转至签名页面 */,
     getSign() {
-      this.userInfo.contactSign = JSON.parse(sessionStorage.getItem("url"));
-      console.log(this.userInfo.contactSign);
+      this.userInfo.contractSign = JSON.parse(sessionStorage.getItem("url"));
+      console.log(this.userInfo.contractSign);
     } /* 获取签名 url */,
     submit() {
       if (this.checkSubmit) {
@@ -165,7 +167,7 @@ export default {
         }); //用户投资
       } else {
         this.sendData.id = this.$route.query.id;
-        this.sendData.contactSign = this.userInfo.contactSign;
+        this.sendData.contractSign = this.userInfo.contractSign;
         this.$api.commend.renewalInvestment(this.sendData).then(res => {
           console.log(res.data);
           if (res.data.code != 1) {

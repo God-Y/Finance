@@ -34,7 +34,6 @@ export default {
       let ID = this.$route.params.id;
       this.$api.invest.investDetial(ID).then(res => {
         let data = res.data;
-        console.log(data);
         if (data.code) {
           this.data = data.data;
         }

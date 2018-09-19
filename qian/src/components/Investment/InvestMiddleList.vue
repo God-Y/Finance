@@ -6,7 +6,7 @@
           <span class="iconfont icon-chanpinyouhua"></span>
           <span class="pro-item">产 品 合 同 </span>
         </div>
-        <span class="check-contract">查看合同
+        <span class="check-contract" @click="checkContract()">查看合同
           <i class="iconfont icon-jiantouyou"></i>
         </span>
       </li>
@@ -86,6 +86,16 @@ export default {
         case 30:
           return "已回款";
       }
+    }
+  },
+  methods: {
+    checkContract() {
+      this.$router.push({
+        path: "/compactOne",
+        query: {
+          id: this.list.id
+        }
+      });
     }
   }
 };
