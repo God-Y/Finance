@@ -74,6 +74,10 @@ export default {
     },
     defaultBankId() {
       return this.$store.getters.userMsg.bankId;
+    },
+    integer() {
+      let num = Number(this.submitData.amount);
+      return Number.isInteger(num / 10000);
     }
   },
   activated() {
@@ -123,10 +127,7 @@ export default {
         this.$toast.fail("投资金额不得小于起投金额");
         return;
       }
-      if (
-        this.submitData.amount < 10000 ||
-        !Number.isInteger(~~this.submitData.amount)
-      ) {
+      if (this.submitData.amount < 10000 || !this.integer) {
         this.$toast.fail("投资金额格式不正确");
       } else {
         this.submitData.productId = this.$route.params.id;

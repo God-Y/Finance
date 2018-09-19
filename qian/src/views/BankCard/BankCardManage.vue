@@ -88,8 +88,18 @@ export default {
   },
   activated() {
     this.getMsg();
+    this.getUser();
   },
   methods: {
+    getUser() {
+      this.$api.me.getMsg().then(res => {
+        let data = res.data;
+        if (data.code) {
+          //这里写入对象
+          this.$store.commit("getUser", data.data);
+        }
+      });
+    },
     getMsg() {
       this.$api.bank.manageBankCard().then(res => {
         let data = res.data;

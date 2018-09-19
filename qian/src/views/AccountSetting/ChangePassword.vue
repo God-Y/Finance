@@ -5,18 +5,24 @@
         <van-field
         v-model="user.oldPassword"
       class="input-style"
+      type="password"
+      clearable
       placeholder="输入原密码"
-      left-icon="contact"/>
+      left-icon="info-o"/>
       <van-field
       v-model="user.password"
       class="input-style"
+      type="password"
+      clearable
         placeholder="输入新密码"
-        left-icon="contact"/>
+        left-icon="info-o"/>
       <van-field
       v-model="user.rePassword"
       class="input-style"
+      type="password"
+      clearable
         placeholder="确认新密码"
-        left-icon="contact"/>
+        left-icon="info-o"/>
     </div>
     <div class="button-box">
       <van-button @click="sendData" :disabled="check" class="button-style" type="warning">确认</van-button>

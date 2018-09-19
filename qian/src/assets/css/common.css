@@ -28,9 +28,9 @@ body {
 }
 
 /* 弹窗的位置调整 */
-.van-toast {
+/* .van-toast {
   top: 80% ;
-}
+} */
 /* 弹窗不换行 */
 .van-toast__text {
   white-space: nowrap;

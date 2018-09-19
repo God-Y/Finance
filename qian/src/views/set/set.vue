@@ -73,17 +73,26 @@ export default {
       }
     },
     loginout() {
-      this.$api.set.loginout().then(res => {
-        console.log(res.data);
-        if (res.data.code == 1) {
-          this.$toast.success(res.data.message);
-        }
-        //跳转到登陆页面
-        setTimeout(() => {
-          this.$router.push("/login");
-          this.$store.commit("loginout");
-        }, 1000);
-      });
+      this.$dialog
+        .confirm({
+          title: "退出登陆",
+          message: "确认退出登陆"
+        })
+        .then(() => {
+          this.$api.set.loginout().then(res => {
+            if (res.data.code == 1) {
+              this.$toast.success(res.data.message);
+            }
+            //跳转到登陆页面
+            setTimeout(() => {
+              this.$router.push("/login");
+              this.$store.commit("loginout");
+            }, 1000);
+          });
+        })
+        .catch(() => {
+          this.$toast("取消操作");
+        });
     }
   }
 };

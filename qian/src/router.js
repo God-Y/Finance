@@ -157,7 +157,7 @@ export default new Router({
       }
     },
     {
-      path: "/real-name/:msg", //消息中心。所有相关的实名信息
+      path: "/real-name/:id", //消息中心。所有相关的实名信息
       name: "Real-name",
       component: () => import("./views/Msg/realName.vue"),
       meta: {

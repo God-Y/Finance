@@ -27,11 +27,9 @@ export default {
   created() {
     this.getMsg();
   },
-  activated() {
+  mounted() {
     if (!this.scrool) {
-      this.scrool = new Bscroll(this.$refs.wrapper, {
-        observeDOM: true
-      });
+      this.scrool = new Bscroll(this.$refs.wrapper, {});
     } else {
       this.scrool.refresh();
       this.scrool.scrollTo(0, 0);
