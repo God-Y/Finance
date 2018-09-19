@@ -3,11 +3,11 @@
     <div class="count-date">
       <div class="count-date-line line-border">
         <span>起息日期</span>
-        <span>2016.11.07</span>
+        <span>{{date.valueDateStart | time}}</span>
       </div>
       <div class="count-date-line">
         <span>到期日期</span>
-        <span>2017.11.08</span>
+        <span>{{date.valueDateEnd | time}}</span>
       </div>
     </div>
     <div class="count-box">
@@ -37,7 +37,8 @@ export default {
     return {
       amountData: {},
       income: "",
-      incomeList: {}
+      incomeList: {},
+      date: {}
     };
   },
   activated() {
@@ -57,6 +58,7 @@ export default {
       console.log(res);
       this.income = res.data.data.expectIncome; /* 获取收益金额 */
       this.incomeList = res.data.data.list;
+      this.date = res.data.data;
       console.log(this.income);
       console.log(this.incomeList);
     });
