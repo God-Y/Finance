@@ -11,6 +11,7 @@
 </template>
  
 <script>
+import { Dialog } from "vant";
 import { Toast } from "vant";
 export default {
   name: "changeEmail",
@@ -23,7 +24,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.getInfo();
+  },
   computed: {
     showButton() {
       if (this.count > 0) {
@@ -35,6 +38,11 @@ export default {
   },
   mounted() {},
   methods: {
+    getInfo() {
+      this.$api.setting.getSetting().then(res => {
+        this.data.email = res.data.data.email;
+      });
+    }, //
     emailInput() {
       this.count = this.data.email.length;
     }, //输入字符
@@ -44,18 +52,29 @@ export default {
       if (!reg.test(this.data.email)) {
         Toast.fail("请输入正确邮箱号");
       } else {
-        this.$api.setting.email(this.data).then(res => {
-          console.log(res);
-          if (res.data.code === 1) {
-            Toast.success("更新成功");
-            this.$router.push({
-              path: "/setting"
+        Dialog.confirm({
+          title: "提示",
+          message: "是否修改？"
+        })
+          .then(() => {
+            // on confirm
+            this.$api.setting.email(this.data).then(res => {
+              console.log(res);
+              if (res.data.code === 1) {
+                Toast.success("更新成功");
+                this.$router.push({
+                  path: "/setting"
+                });
+              } else {
+                Toast.fail("更新失败,请重试");
+                return false;
+              }
             });
-          } else {
-            Toast.fail("更新失败,请重试");
-            return false;
-          }
-        });
+          })
+          .catch(() => {
+            // on cancel
+            Toast.fail("已取消");
+          });
       }
     }
   }

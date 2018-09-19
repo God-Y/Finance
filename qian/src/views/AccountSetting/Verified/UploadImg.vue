@@ -57,6 +57,11 @@ export default {
   created() {},
   computed: {},
   mounted() {},
+  beforeRouteLeave(to, from, next) {
+    this.font = true;
+    this.back = true;
+    next();
+  }, //离开页面后把上传图片按钮显示出来
   methods: {
     getUser() {
       this.user = JSON.parse(localStorage.getItem("user"));
