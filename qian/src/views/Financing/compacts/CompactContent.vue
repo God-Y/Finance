@@ -2,7 +2,7 @@
   <div>
     <div class="compact-content">
       <h4>出借咨询与服务协议</h4>
-      <p>本协议由以下双方于{{userInfo.gmtCreate | chineseTime}}在中华人民共和国北京市朝阳区签署 </p>
+      <p>本协议由以下双方于<span v-if="userInfo.gmtCreate">{{userInfo.gmtCreate | chineseTime}}</span><span v-else> 年 月 日</span> 在中华人民共和国北京市朝阳区签署 </p>
       <p>甲方（出借人）： <span v-if="userInfo.idName">{{userInfo.idName}}</span></p>
       <p>证件类型：<span>{{userInfo.type}}</span></p> 
       <p>证件号：<span>{{userInfo.idNumber}}</span></p>

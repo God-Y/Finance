@@ -30,9 +30,11 @@ export default {
       });
     },
     back() {
-      this.$router.push({
-        path: "/setting"
-      });
+      console.log("s");
+      // this.$router.push({
+      //   path: "/me"
+      // });
+      this.$router.go(-1);
     }
   }
 };
